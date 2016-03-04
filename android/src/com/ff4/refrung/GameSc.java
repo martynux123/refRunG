@@ -16,7 +16,7 @@ public class GameSc implements Screen{
 	private ArrayList<NorwayRefugee> NorwayRefs;
 	private ArrayList<LithuanianRefugee> LithuanianRefs;
 	private ArrayList<GermanRefugee> GermanRefs;
-	
+	private ArrayList<Terrorist> Terrorist;
 	
 	public GameSc(GameRunner runner){
 		this.runner = runner;
@@ -25,6 +25,7 @@ public class GameSc implements Screen{
 		refuggeThread();
 		terroristThread();
 		
+		Terrorist = new ArrayList<Terrorist>();
 		NorwayRefs = new ArrayList<NorwayRefugee>();
 		LithuanianRefs = new ArrayList<LithuanianRefugee>();
 		GermanRefs = new ArrayList<GermanRefugee>();
