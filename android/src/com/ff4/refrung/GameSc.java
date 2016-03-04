@@ -1,5 +1,7 @@
 package com.ff4.refrung;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,6 +13,10 @@ public class GameSc implements Screen{
 	public GameRunner runner;
 	public SpriteBatch batch;
 	public ShapeRenderer shape;
+	private ArrayList<NorwayRefugee> NorwayRefs;
+	private ArrayList<LithuanianRefugee> LithuanianRefs;
+	private ArrayList<GermanRefugee> GermanRefs;
+	
 	
 	public GameSc(GameRunner runner){
 		this.runner = runner;
@@ -18,6 +24,11 @@ public class GameSc implements Screen{
 		shape = new ShapeRenderer();
 		refuggeThread();
 		terroristThread();
+		
+		NorwayRefs = new ArrayList<NorwayRefugee>();
+		LithuanianRefs = new ArrayList<LithuanianRefugee>();
+		GermanRefs = new ArrayList<GermanRefugee>();
+		
 	}
 	
 	private void refuggeThread(){
