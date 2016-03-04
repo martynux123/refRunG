@@ -93,15 +93,18 @@ public class GameSc implements Screen{
 	}
 	
 	public void spawnTerrorist(float x, float y, float speed){
-		
+		Terrorist.add(new Terrorist(x,y,speed));
 	}
 	public void spawnLtRefugee(float x, float y, float speed){
+		LithuanianRefs.add(new LithuanianRefugee(x,y,speed));
 		
 	}
 	public void spawnNorwegianRefugee(float x, float y, float speed){
+		NorwayRefs.add(new NorwayRefugee(x,y,speed));
 		
 	}
 	public void spawnGermanRefugee(float x, float y, float speed){
+		GermanRefs.add(new GermanRefugee(x,y,speed));
 		
 	}
 
