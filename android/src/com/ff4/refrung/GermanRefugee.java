@@ -15,8 +15,8 @@ public class GermanRefugee {
 	public float x;
 	public float y;
 	private float speed;
-	private Texture[] refugee = new Texture[6];
 	private int index;
+	private Texture[] refugee = new Texture[7];
 	private int tickcount;
 	
 	public static final int DEFAULT_SPEED = 8;
@@ -30,29 +30,35 @@ public class GermanRefugee {
 		this.speed = speed;
 		rect = new Rectangle(x,y,SIZE,SIZE);
 		
-		refugee[0] = GameRunner.assets.get("badlogic.jpg");
-		//refugee[0] = GameRunner.assets.get("GermanRef1.1");
-		//refugee[1] = GameRunner.assets.get("GermanRef1.2");
-		//refugee[2] = GameRunner.assets.get("GermanRef1.3");
-		//refugee[3] = GameRunner.assets.get("GermanRef1.4");
-		//refugee[4] = GameRunner.assets.get("GermanRef1.5");
-		//refugee[5] = GameRunner.assets.get("GermanRef1.6");
+		refugee[0] = GameRunner.assets.get("Terrorist1.1.png");
+		refugee[1] = GameRunner.assets.get("Terrorist1.2.png");
+		refugee[2] = GameRunner.assets.get("Terrorist1.3.png");
+		refugee[3] = GameRunner.assets.get("Terrorist1.4.png");
+		refugee[4] = GameRunner.assets.get("Terrorist1.1.png");
+		refugee[5] = GameRunner.assets.get("Terrorist1.2.png");
+		refugee[6] = GameRunner.assets.get("Terrorist1.4.png");
 	}
 	public void render(SpriteBatch batch, ShapeRenderer shape){
 		x-=Gdx.input.getAccelerometerX();
 		y-=speed;
 		
-		if(tickcount>8){
+		if(tickcount>6){
 			tickcount = 0;
 			index++;
 		}
-		if(index>7){
+		if(index>6){
 			index = 0;
+		}
+		if(x<0){
+			x=0;
+		}
+		if(x>Gdx.graphics.getWidth()-SIZE){
+			x = Gdx.graphics.getWidth()-SIZE;
 		}
 		
 		tickcount++;
 		batch.begin();
-		batch.draw(refugee[0], x, y, SIZE, SIZE);
+		batch.draw(refugee[index], x, y, SIZE, SIZE);
 		batch.end();
 		
 		if(debugMode){

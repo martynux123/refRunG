@@ -23,8 +23,7 @@ public class GameSc implements Screen{
 		this.runner = runner;
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
-		refuggeThread();
-		terroristThread();
+		
 		
 		Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
 		
@@ -32,6 +31,9 @@ public class GameSc implements Screen{
 		NorwayRefs = new ArrayList<NorwayRefugee>();
 		LithuanianRefs = new ArrayList<LithuanianRefugee>();
 		GermanRefs = new ArrayList<GermanRefugee>();
+		
+		refuggeThread();
+		terroristThread();
 		
 	}
 	
@@ -68,7 +70,7 @@ public class GameSc implements Screen{
 					
 				}
 			}
-		});
+		}).start();
 	}
 	private void terroristThread(){
 		new Thread(new Runnable() {
@@ -76,7 +78,7 @@ public class GameSc implements Screen{
 			@Override
 			public void run() {
 				while(true){
-					long randTime = MathUtils.random(4000, 1000);
+					long randTime = MathUtils.random(1000, 4000);
 					
 					try {
 						Thread.sleep(randTime);
@@ -92,7 +94,7 @@ public class GameSc implements Screen{
 					
 				}
 			}
-		});
+		}).start();
 	}
 	
 	public void spawnTerrorist(float x, float y, float speed){
@@ -120,19 +122,59 @@ public class GameSc implements Screen{
 	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	
-		//NorwayRefs
+		System.out.println(Terrorist.size());
+		
+		//DOING EVERYTHING FOR TERRORIST
+		for(int i =0; i<Terrorist.size(); i++){
+			Terrorist.get(i).render(batch, shape);
+		}
+		for(int i = 0; i<Terrorist.size(); i++){
+			if(Terrorist.get(i).y<0){
+				Terrorist.remove(i);
+			}
+		}
+		
+		
+		/*
+		//DOING EVERYTHING FOR NORWAY
 		for(int i = 0; i<NorwayRefs.size(); i++){
 			NorwayRefs.get(i).render(batch, shape);
 		}
-		//GermanRefs
+		for(int i = 0; i<NorwayRefs.size(); i++){
+			if(NorwayRefs.get(i).y<0){
+				NorwayRefs.remove(i);
+			}
+		}
+		
+
+		//DOING EVERYTHING FOR GERMAN
 		for(int i = 0; i<GermanRefs.size(); i++){
 			GermanRefs.get(i).render(batch, shape);
 		}
-		//LithuanianRefs
+		for(int i = 0; i<GermanRefs.size(); i++){
+			if(GermanRefs.get(i).y<0){
+				GermanRefs.remove(i);
+			}
+		}
+		
+		
+		
+		//DOING EVERYTHING FOR NORWAY
 		for(int i = 0; i<LithuanianRefs.size(); i++){
 			LithuanianRefs.get(i).render(batch, shape);
 		}
+		for(int i = 0; i<LithuanianRefs.size(); i++){
+			if(LithuanianRefs.get(i).y<0){
+				LithuanianRefs.remove(i);
+			}
+		}
+		 */		
 		
+		
+		
+		
+		
+		/*
 		//Out of bounds norway
 		for(int i = 0; i<NorwayRefs.size(); i++){
 			if(NorwayRefs.get(i).y < 0)
@@ -148,6 +190,8 @@ public class GameSc implements Screen{
 			if(GermanRefs.get(i).y < 0)
 				GermanRefs.remove(i);
 		}
+		*/
+		
 	}
 
 	@Override
