@@ -22,7 +22,7 @@ public class GameRunner extends Game{
 		assets.load("badlogic.jpg", Texture.class);
 		
 		assets.finishLoading();
-		setScreen(new GameSc(this));
+		setScreen(new GameMenu(this));
 		
 	}
 	
