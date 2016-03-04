@@ -11,6 +11,8 @@ public class GameRunner extends Game{
 		
 		assets = new AssetManager();
 		
+		setScreen(new GameSc(this));
+		
 	}
 	
 	
