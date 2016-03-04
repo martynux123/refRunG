@@ -133,6 +133,21 @@ public class GameSc implements Screen{
 			LithuanianRefs.get(i).render(batch, shape);
 		}
 		
+		//Out of bounds norway
+		for(int i = 0; i<NorwayRefs.size(); i++){
+			if(NorwayRefs.get(i).y < 0)
+				NorwayRefs.remove(i);
+		}
+		//Out of bounds German
+		for(int i = 0; i<GermanRefs.size(); i++){
+			if(GermanRefs.get(i).y < 0)
+				GermanRefs.remove(i);
+		}
+		//Out of bounds LT
+		for(int i = 0; i<LithuanianRefs.size(); i++){
+			if(GermanRefs.get(i).y < 0)
+				GermanRefs.remove(i);
+		}
 	}
 
 	@Override

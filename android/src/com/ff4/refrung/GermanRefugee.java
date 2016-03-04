@@ -12,8 +12,8 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class GermanRefugee {
 	
-	private float x;
-	private float y;
+	public float x;
+	public float y;
 	private float speed;
 	private Texture[] refugee = new Texture[6];
 	private int index;
