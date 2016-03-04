@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
@@ -24,6 +25,8 @@ public class GameSc implements Screen{
 		shape = new ShapeRenderer();
 		refuggeThread();
 		terroristThread();
+		
+		Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
 		
 		Terrorist = new ArrayList<Terrorist>();
 		NorwayRefs = new ArrayList<NorwayRefugee>();
@@ -115,6 +118,20 @@ public class GameSc implements Screen{
 
 	@Override
 	public void render(float delta) {
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	
+		//NorwayRefs
+		for(int i = 0; i<NorwayRefs.size(); i++){
+			NorwayRefs.get(i).render(batch, shape);
+		}
+		//GermanRefs
+		for(int i = 0; i<GermanRefs.size(); i++){
+			GermanRefs.get(i).render(batch, shape);
+		}
+		//LithuanianRefs
+		for(int i = 0; i<LithuanianRefs.size(); i++){
+			LithuanianRefs.get(i).render(batch, shape);
+		}
 		
 	}
 
@@ -137,5 +154,7 @@ public class GameSc implements Screen{
 
 	@Override
 	public void dispose() {
+	batch.dispose();
+	shape.dispose();
 	}
 }
