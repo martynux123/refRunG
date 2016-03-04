@@ -24,8 +24,9 @@ public class GameMenu implements Screen{
 	@Override
 	public void render(float delta) {
 		//Drawing background
+		batch.begin();
 		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		
+		batch.end();
 		
 		//Changing screen
 		if(Gdx.input.justTouched()){

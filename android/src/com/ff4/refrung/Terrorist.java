@@ -22,7 +22,7 @@ public class Terrorist {
 	public static final int DEFAULT_SPEED = 8;
 	public static final int SIZE = 200;
 	public Rectangle rect;
-	private boolean debugMode = false;
+	private boolean debugMode = true;
 	
 	public Terrorist(float x, float y, float speed){
 		this.x = x;
@@ -41,7 +41,7 @@ public class Terrorist {
 		
 	}
 	public void render(SpriteBatch batch, ShapeRenderer shape){
-		x+=Gdx.input.getAccelerometerX();
+		x+=Gdx.input.getAccelerometerX()*5;
 		y-=speed;
 		
 		if(tickcount>6){

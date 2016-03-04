@@ -3,9 +3,11 @@ package com.ff4.refrung;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -17,6 +19,9 @@ public class GameSc implements Screen{
 	public GameRunner runner;
 	public SpriteBatch batch;
 	public ShapeRenderer shape;
+	private Preferences prefs;
+	private int Score;
+	private BitmapFont scoreFont;
 	
 	//REFUGEES
 	private ArrayList<NorwayRefugee> NorwayRefs;
@@ -28,7 +33,8 @@ public class GameSc implements Screen{
 	private Rectangle LithuanianPost;
 	private Rectangle NorwayPost;
 	private Rectangle GermanPost;
-	
+	private int touchX;
+	private int touchY;
 	
 	public GameSc(GameRunner runner){
 		this.runner = runner;
@@ -37,6 +43,8 @@ public class GameSc implements Screen{
 		
 		
 		Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+		
+		scoreFont = GameRunner.font;
 		
 		//Refugees List
 		Terrorist = new ArrayList<Terrorist>();
@@ -49,7 +57,9 @@ public class GameSc implements Screen{
 		NorwayPost = new Rectangle();
 		GermanPost = new Rectangle();
 		
-		
+		prefs = Gdx.app.getPreferences("Stats");
+		prefs.putInteger("Score", Score);
+		prefs.flush();
 		
 		refuggeThread();
 		terroristThread();
@@ -143,6 +153,15 @@ public class GameSc implements Screen{
 	
 		System.out.println(Terrorist.size());
 		
+		 touchX = Gdx.input.getX();
+		 touchY = Gdx.input.getY() + ((Gdx.graphics.getHeight() / 2 - Gdx.input.getY()) * 2);
+		
+		 batch.begin();
+		 scoreFont.draw(batch, " " + prefs.getInteger("Score", Score), Gdx.graphics.getWidth()/2,
+				 Gdx.graphics.getHeight()/2);
+		 batch.end();
+		 
+		 
 		//DOING EVERYTHING FOR TERRORIST
 		for(int i =0; i<Terrorist.size(); i++){
 			Terrorist.get(i).render(batch, shape);
@@ -151,6 +170,12 @@ public class GameSc implements Screen{
 			if(Terrorist.get(i).y<0){
 				Terrorist.remove(i);
 			}
+			if(Gdx.input.justTouched() && Terrorist.get(i).rect.contains(touchX, touchY)){
+				Terrorist.remove(i);
+				Score++;
+			}
+				
+				
 		}
 		
 		
