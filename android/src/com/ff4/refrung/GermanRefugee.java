@@ -30,12 +30,13 @@ public class GermanRefugee {
 		this.speed = speed;
 		rect = new Rectangle(x,y,SIZE,SIZE);
 		
-		refugee[0] = GameRunner.assets.get("GermanRef1.1");
-		refugee[1] = GameRunner.assets.get("GermanRef1.2");
-		refugee[2] = GameRunner.assets.get("GermanRef1.3");
-		refugee[3] = GameRunner.assets.get("GermanRef1.4");
-		refugee[4] = GameRunner.assets.get("GermanRef1.5");
-		refugee[5] = GameRunner.assets.get("GermanRef1.6");
+		refugee[0] = GameRunner.assets.get("badlogic.jpg");
+		//refugee[0] = GameRunner.assets.get("GermanRef1.1");
+		//refugee[1] = GameRunner.assets.get("GermanRef1.2");
+		//refugee[2] = GameRunner.assets.get("GermanRef1.3");
+		//refugee[3] = GameRunner.assets.get("GermanRef1.4");
+		//refugee[4] = GameRunner.assets.get("GermanRef1.5");
+		//refugee[5] = GameRunner.assets.get("GermanRef1.6");
 	}
 	public void render(SpriteBatch batch, ShapeRenderer shape){
 		x-=Gdx.input.getAccelerometerX();
@@ -51,7 +52,7 @@ public class GermanRefugee {
 		
 		tickcount++;
 		batch.begin();
-		batch.draw(refugee[index], x, y, SIZE, SIZE);
+		batch.draw(refugee[0], x, y, SIZE, SIZE);
 		batch.end();
 		
 		if(debugMode){

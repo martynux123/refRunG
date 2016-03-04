@@ -29,12 +29,12 @@ public class Terrorist {
 		this.y = y;
 		this.speed = speed;
 		rect = new Rectangle(x,y,SIZE,SIZE);
-		refugee[0] = GameRunner.assets.get("Terrorist1.1");
-		refugee[1] = GameRunner.assets.get("Terrorist1.2");
-		refugee[2] = GameRunner.assets.get("Terrorist1.3");
-		refugee[3] = GameRunner.assets.get("Terrorist1.4");
-		refugee[4] = GameRunner.assets.get("Terrorist1.5");
-		refugee[5] = GameRunner.assets.get("Terrorist1.6");
+		refugee[0] = GameRunner.assets.get("badlogic.jpg");
+		//refugee[1] = GameRunner.assets.get("Terrorist1.2");
+		//refugee[2] = GameRunner.assets.get("Terrorist1.3");
+		//refugee[3] = GameRunner.assets.get("Terrorist1.4");
+		//refugee[4] = GameRunner.assets.get("Terrorist1.5");
+		//refugee[5] = GameRunner.assets.get("Terrorist1.6");
 		
 		
 	}
@@ -52,7 +52,7 @@ public class Terrorist {
 		
 		tickcount++;
 		batch.begin();
-		batch.draw(refugee[index], x, y, SIZE, SIZE);
+		batch.draw(refugee[0], x, y, SIZE, SIZE);
 		batch.end();
 		
 		if(debugMode){
