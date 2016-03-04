@@ -4,20 +4,31 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 
 public class GameSc implements Screen{
 	
 	public GameRunner runner;
 	public SpriteBatch batch;
 	public ShapeRenderer shape;
+	
+	//REFUGEES
 	private ArrayList<NorwayRefugee> NorwayRefs;
 	private ArrayList<LithuanianRefugee> LithuanianRefs;
 	private ArrayList<GermanRefugee> GermanRefs;
 	private ArrayList<Terrorist> Terrorist;
+	
+	//POSTS
+	private Rectangle LithuanianPost;
+	private Rectangle NorwayPost;
+	private Rectangle GermanPost;
+	
 	
 	public GameSc(GameRunner runner){
 		this.runner = runner;
@@ -27,10 +38,18 @@ public class GameSc implements Screen{
 		
 		Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
 		
+		//Refugees List
 		Terrorist = new ArrayList<Terrorist>();
 		NorwayRefs = new ArrayList<NorwayRefugee>();
 		LithuanianRefs = new ArrayList<LithuanianRefugee>();
 		GermanRefs = new ArrayList<GermanRefugee>();
+		
+		//Posts
+		LithuanianPost = new Rectangle();
+		NorwayPost = new Rectangle();
+		GermanPost = new Rectangle();
+		
+		
 		
 		refuggeThread();
 		terroristThread();
@@ -191,6 +210,16 @@ public class GameSc implements Screen{
 				GermanRefs.remove(i);
 		}
 		*/
+		shape.setAutoShapeType(true);
+		shape.begin(ShapeType.Filled);
+		shape.setColor(Color.BLACK);
+		shape.rect(30, 10, 250, 250);
+		shape.setColor(Color.GREEN);
+		shape.rect(380, 10, 250,250);
+		shape.setColor(Color.BLUE);
+		shape.rect(730, 10, 250,250);
+		shape.end();
+		
 		
 	}
 
