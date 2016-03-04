@@ -103,30 +103,30 @@ public class GameSc implements Screen {
 		}).start();
 	}
 
-			private void terroristThread() {
-				new Thread(new Runnable() {
+	private void terroristThread() {
+		new Thread(new Runnable() {
 
-					@Override
-					public void run() {
-						while (true) {
-							long randTime = MathUtils.random(1000, 4000);
+			@Override
+			public void run() {
+				while (true) {
+					long randTime = MathUtils.random(1000, 4000);
 
-							try {
-								Thread.sleep(randTime);
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
-
-							float randX = MathUtils.random(0, Gdx.graphics
-									.getWidth() /* TODO: handle uniform size */);
-
-							spawnTerrorist(randX, Gdx.graphics.getHeight(),
-									10 /* TODO: handle uniform speed */);
-
-						}
+					try {
+						Thread.sleep(randTime);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
-				}).start();
+
+					float randX = MathUtils.random(0, Gdx.graphics
+							.getWidth() /* TODO: handle uniform size */);
+
+					spawnTerrorist(randX, Gdx.graphics.getHeight(),
+							10 /* TODO: handle uniform speed */);
+
+				}
 			}
+		}).start();
+	}
 
 	public void spawnTerrorist(float x, float y, float speed) {
 		Terrorist.add(new Terrorist(x, y, speed));
@@ -157,19 +157,13 @@ public class GameSc implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		System.out.println(Terrorist.size());
-<<<<<<< HEAD
-		
-		 touchX = Gdx.input.getX();
-		 touchY = Gdx.input.getY() + ((Gdx.graphics.getHeight() / 2 - Gdx.input.getY()) * 2);
-		 batch.begin();
-		 scoreFont.draw(batch, " " + prefs.getInteger("Score", Score), Gdx.graphics.getWidth()/2,
-				 Gdx.graphics.getHeight()/2);
-		 batch.end();
-		 
-		 
-		//DOING EVERYTHING FOR TERRORIST
-		for(int i =0; i<Terrorist.size(); i++){
-=======
+
+		touchX = Gdx.input.getX();
+		touchY = Gdx.input.getY() + ((Gdx.graphics.getHeight() / 2 - Gdx.input.getY()) * 2);
+		batch.begin();
+		scoreFont.draw(batch, " " + prefs.getInteger("Score", Score), Gdx.graphics.getWidth() / 2,
+				Gdx.graphics.getHeight() / 2);
+		batch.end();
 
 		touchX = Gdx.input.getX();
 		touchY = Gdx.input.getY() + ((Gdx.graphics.getHeight() / 2 - Gdx.input.getY()) * 2);
@@ -183,68 +177,87 @@ public class GameSc implements Screen {
 
 		// DOING EVERYTHING FOR TERRORIST
 		for (int i = 0; i < Terrorist.size(); i++) {
->>>>>>> b0b6b7a60b0d2084aba501004da6299d469f9721
 			Terrorist.get(i).render(batch, shape);
 		}
 		for (int i = 0; i < Terrorist.size(); i++) {
 			if (Terrorist.get(i).y < 0) {
 				Terrorist.remove(i);
 			}
-<<<<<<< HEAD
+			// <<<<<<< HEAD
 		}
-		for(int i = 0; i<Terrorist.size(); i++){
-			if(Terrorist.get(i).rect.contains(touchX, touchY)&& Gdx.input.justTouched()){
+		for (int i = 0; i < Terrorist.size(); i++) {
+			if (Terrorist.get(i).rect.contains(touchX, touchY) && Gdx.input.justTouched()) {
 				Terrorist.remove(i);
 				Score++;
-			}	
-=======
+			}
+		}
+		for (int i = 0; i < Terrorist.size(); i++) {
 			if (Gdx.input.justTouched() && Terrorist.get(i).rect.contains(touchX, touchY)) {
 				Terrorist.remove(i);
 				Score++;
 			}
-
->>>>>>> b0b6b7a60b0d2084aba501004da6299d469f9721
+		}
+		
+		// DOING EVERYTHING FOR NORWAY
+		for (int i = 0; i < NorwayRefs.size(); i++) {
+			NorwayRefs.get(i).render(batch, shape);
+		}
+		for (int i = 0; i < NorwayRefs.size(); i++) {
+			if (NorwayRefs.get(i).y < 0) {
+				NorwayRefs.remove(i);
+			}
 		}
 
-		/*
-		 * //DOING EVERYTHING FOR NORWAY for(int i = 0; i<NorwayRefs.size();
-		 * i++){ NorwayRefs.get(i).render(batch, shape); } for(int i = 0;
-		 * i<NorwayRefs.size(); i++){ if(NorwayRefs.get(i).y<0){
-		 * NorwayRefs.remove(i); } }
-		 * 
-		 * 
-		 * //DOING EVERYTHING FOR GERMAN for(int i = 0; i<GermanRefs.size();
-		 * i++){ GermanRefs.get(i).render(batch, shape); } for(int i = 0;
-		 * i<GermanRefs.size(); i++){ if(GermanRefs.get(i).y<0){
-		 * GermanRefs.remove(i); } }
-		 * 
-		 * 
-		 * 
-		 * //DOING EVERYTHING FOR NORWAY for(int i = 0; i<LithuanianRefs.size();
-		 * i++){ LithuanianRefs.get(i).render(batch, shape); } for(int i = 0;
-		 * i<LithuanianRefs.size(); i++){ if(LithuanianRefs.get(i).y<0){
-		 * LithuanianRefs.remove(i); } }
-		 */
+		// DOING EVERYTHING FOR GERMAN
+		for (int i = 0; i < GermanRefs.size(); i++) {
+			GermanRefs.get(i).render(batch, shape);
+		}
 
-		/*
-		 * //Out of bounds norway for(int i = 0; i<NorwayRefs.size(); i++){
-		 * if(NorwayRefs.get(i).y < 0) NorwayRefs.remove(i); } //Out of bounds
-		 * German for(int i = 0; i<GermanRefs.size(); i++){
-		 * if(GermanRefs.get(i).y < 0) GermanRefs.remove(i); } //Out of bounds
-		 * LT for(int i = 0; i<LithuanianRefs.size(); i++){
-		 * if(GermanRefs.get(i).y < 0) GermanRefs.remove(i); }
-		 */
-		shape.setAutoShapeType(true);
-		shape.begin(ShapeType.Filled);
-		shape.setColor(Color.BLACK);
-		shape.rect(30, 10, 250, 250);
-		shape.setColor(Color.GREEN);
-		shape.rect(380, 10, 250, 250);
-		shape.setColor(Color.BLUE);
-		shape.rect(730, 10, 250, 250);
-		shape.end();
+		for (int i = 0; i < GermanRefs.size(); i++) {
+			if (GermanRefs.get(i).y < 0) {
+				GermanRefs.remove(i);
+			}
+		}
+
+		// DOING EVERYTHING FOR NORWAY
+		for (int i = 0; i < LithuanianRefs.size(); i++) {
+			LithuanianRefs.get(i).render(batch, shape);
+		}
+		for (int i = 0; i < LithuanianRefs.size(); i++) {
+			if (LithuanianRefs.get(i).y < 0) {
+				LithuanianRefs.remove(i);
+			}
+		}
+
+
+		for (int i = 0; i < NorwayRefs.size(); i++) {
+			if (NorwayRefs.get(i).y < 0)
+				NorwayRefs.remove(i);
+		}
+
+	for(int i = 0;i<GermanRefs.size();i++){
+		
+		if (GermanRefs.get(i).y < 0)
+			GermanRefs.remove(i);
+		
+		if (GermanRefs.get(i).y < 0)
+			GermanRefs.remove(i);
+	} 
+	
+	// Out of bounds
+
+	shape.setAutoShapeType(true);
+	shape.begin(ShapeType.Filled);
+	shape.setColor(Color.BLACK);
+	shape.rect(30,10,250,250);
+	shape.setColor(Color.GREEN);
+	shape.rect(380,10,250,250);
+	shape.setColor(Color.BLUE);
+	shape.rect(730,10,250,250);
+	shape.end();
 
 	}
+	
 
 	@Override
 	public void resize(int width, int height) {
