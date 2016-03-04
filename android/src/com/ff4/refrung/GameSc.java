@@ -155,7 +155,6 @@ public class GameSc implements Screen{
 		
 		 touchX = Gdx.input.getX();
 		 touchY = Gdx.input.getY() + ((Gdx.graphics.getHeight() / 2 - Gdx.input.getY()) * 2);
-		
 		 batch.begin();
 		 scoreFont.draw(batch, " " + prefs.getInteger("Score", Score), Gdx.graphics.getWidth()/2,
 				 Gdx.graphics.getHeight()/2);
@@ -170,12 +169,12 @@ public class GameSc implements Screen{
 			if(Terrorist.get(i).y<0){
 				Terrorist.remove(i);
 			}
-			if(Gdx.input.justTouched() && Terrorist.get(i).rect.contains(touchX, touchY)){
+		}
+		for(int i = 0; i<Terrorist.size(); i++){
+			if(Terrorist.get(i).rect.contains(touchX, touchY)&& Gdx.input.justTouched()){
 				Terrorist.remove(i);
 				Score++;
-			}
-				
-				
+			}	
 		}
 		
 		
