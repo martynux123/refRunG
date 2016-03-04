@@ -40,7 +40,7 @@ public class NorwayRefugee {
 		
 	}
 	public void render(SpriteBatch batch, ShapeRenderer shape){
-		x-=Gdx.input.getAccelerometerX();
+		x-=Gdx.input.getAccelerometerX()*5;
 		y-=speed;
 		
 		if(tickcount>6){
