@@ -17,6 +17,7 @@ public class GameMenu implements Screen{
 
 	@Override
 	public void show() {
+		Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
 		batch = new SpriteBatch();
 		background = GameRunner.assets.get("badlogic.jpg");
 	}
@@ -32,6 +33,7 @@ public class GameMenu implements Screen{
 		if(Gdx.input.justTouched()){
 			runner.setScreen(new GameSc(runner));
 		}
+		
 	}
 
 	@Override
@@ -41,8 +43,7 @@ public class GameMenu implements Screen{
 	@Override
 	public void pause() {
 	}
-
-	@Override
+	
 	public void resume() {
 	}
 
