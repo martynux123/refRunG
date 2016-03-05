@@ -135,7 +135,7 @@ public class GameSc implements Screen {
 	}
 
 	public void spawnLtRefugee(float x, float y, float speed) {
-		LithuanianRefs.add(new LithuanianRefugee(x, y, speed));
+	 	LithuanianRefs.add(new LithuanianRefugee(x, y, speed));
 
 	}
 

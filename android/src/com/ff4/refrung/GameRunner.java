@@ -15,9 +15,9 @@ public class GameRunner extends Game{
 	public static BitmapFont font;
 	private SpriteBatch batch;
 	public static ParticleEffect particles;
+	public static BitmapFont smallFont;
+	
 	@Override
-	
-	
 	public void create() {
 		
 		GameRunner.assets = new AssetManager();
@@ -65,12 +65,17 @@ public class GameRunner extends Game{
 		parameter.size = (int) (Gdx.graphics.getHeight()*0.092);
 		font = fontgen.generateFont(parameter);
 		
+		FreeTypeFontParameter parametersmall = new FreeTypeFontParameter();
+		parametersmall.size = (int) (Gdx.graphics.getHeight()*0.052);
+		smallFont = fontgen.generateFont(parametersmall);
+		
 		particles = new ParticleEffect();
 		particles.load(Gdx.files.internal("tryout"), Gdx.files.internal(""));
 		particles.scaleEffect(2f);
 		
 		
-		setScreen(new GameMenu(this));
+//		setScreen(new GameMenu(this));
+		setScreen(new HelpScreen(this));
 		
 		
 		
