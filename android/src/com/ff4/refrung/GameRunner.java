@@ -37,11 +37,19 @@ public class GameRunner extends Game{
 		GameRunner.assets.load("German/German1.3.png", Texture.class);
 		GameRunner.assets.load("German/German1.4.png", Texture.class);
 		
+		//Norway
+		GameRunner.assets.load("Norway/Norway1.1.png", Texture.class);
+		GameRunner.assets.load("Norway/Norway1.2.png", Texture.class);
+		GameRunner.assets.load("Norway/Norway1.3.png", Texture.class);
+		GameRunner.assets.load("Norway/Norway1.4.png", Texture.class);
+		
 		//Lithuanian
 		GameRunner.assets.load("Lithuanian/Lithuanian1.1.png", Texture.class);
 		GameRunner.assets.load("Lithuanian/Lithuanian1.2.png", Texture.class);
 		GameRunner.assets.load("Lithuanian/Lithuanian1.3.png", Texture.class);
 		GameRunner.assets.load("Lithuanian/Lithuanian1.4.png", Texture.class);
+		
+		
 		
 		GameRunner.assets.load("Loading.png", Texture.class);
 		

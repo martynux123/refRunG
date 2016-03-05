@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameMenu implements Screen{
@@ -15,6 +16,7 @@ public class GameMenu implements Screen{
 	private GameRunner runner;
 	private boolean isLoaded = false;
 	private Timer timer;
+	private BitmapFont taptoPlay;
 	
 	public GameMenu(GameRunner runner){
 		this.runner = runner;
@@ -30,6 +32,7 @@ public class GameMenu implements Screen{
 		}, 2000);
 		//
 		
+		taptoPlay = GameRunner.font;
 	}
 
 	@Override
@@ -50,6 +53,7 @@ public class GameMenu implements Screen{
 		if(isLoaded){
 			batch.begin();
 			batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+			taptoPlay.draw(batch, "Tap to play", Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/4);
 			batch.end();
 		
 		//Changing screen

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 
@@ -46,7 +47,7 @@ public class GermanRefugee {
 		
 		rect.setPosition(x, y);
 		
-		x-=Gdx.input.getAccelerometerX()*5;
+		x-=Gdx.input.getAccelerometerX()*MathUtils.random(5, 8);
 		y-=speed;
 		
 		if(tickcount>6){

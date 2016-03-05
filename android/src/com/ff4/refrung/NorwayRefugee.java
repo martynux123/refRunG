@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 
@@ -20,8 +21,7 @@ public class NorwayRefugee {
 	private int tickcount;
 	
 	public static final int DEFAULT_SPEED = (int) (Gdx.graphics.getHeight()*0.0040f);
-
-	public static final int SIZE = (int) (Gdx.graphics.getHeight()*0.185f);
+	public static final int SIZE = (int) (Gdx.graphics.getWidth()*0.185f);
 
 
 	public Rectangle rect;
@@ -33,17 +33,19 @@ public class NorwayRefugee {
 		this.speed = speed;
 		rect = new Rectangle(x,y,SIZE,SIZE);
 		
-		refugee[0] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
-		refugee[1] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
-		refugee[2] = GameRunner.assets.get("Terrorist/Terrorist1.3.png");
-		refugee[3] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
-		refugee[4] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
-		refugee[5] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
-		refugee[6] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
+		refugee[0] = GameRunner.assets.get("Norway/Norway1.1.png");
+		refugee[1] = GameRunner.assets.get("Norway/Norway1.2.png");
+		refugee[2] = GameRunner.assets.get("Norway/Norway1.3.png");
+		refugee[3] = GameRunner.assets.get("Norway/Norway1.1.png");
+		refugee[4] = GameRunner.assets.get("Norway/Norway1.2.png");
+		refugee[5] = GameRunner.assets.get("Norway/Norway1.3.png");
+		refugee[6] = GameRunner.assets.get("Norway/Norway1.4.png");
 		
 	}
 	public void render(SpriteBatch batch, ShapeRenderer shape){
-		x-=Gdx.input.getAccelerometerX()*5;
+		
+		
+		x-=Gdx.input.getAccelerometerX()*MathUtils.random(5, 8);
 		y-=speed;
 		
 		if(tickcount>6){
@@ -59,6 +61,8 @@ public class NorwayRefugee {
 		if(x>Gdx.graphics.getWidth()-SIZE){
 			x = Gdx.graphics.getWidth()-SIZE;
 		}
+		
+		rect.setPosition(x, y);
 		
 		tickcount++;
 		batch.begin();

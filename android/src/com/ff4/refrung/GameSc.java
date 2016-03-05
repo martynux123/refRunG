@@ -212,7 +212,7 @@ public class GameSc implements Screen {
 		}
 		
 		
-		/*
+		
 		// DOING EVERYTHING FOR NORWAY
 		for (int i = 0; i < NorwayRefs.size(); i++) {
 			NorwayRefs.get(i).render(batch, shape);
@@ -222,7 +222,15 @@ public class GameSc implements Screen {
 				NorwayRefs.remove(i);
 			}
 		}
-*/
+		for(int i=0; i<NorwayRefs.size(); i++){
+			if(NorwayRefs.get(i).rect.overlaps(LithuanianPost) || NorwayRefs.get(i).rect.overlaps(GermanPost)){
+				runner.setScreen(new GameOver(runner));
+			}
+		}
+		for(int i=0; i<NorwayRefs.size(); i++){
+			NorwayRefs.remove(i);
+			Score++;
+		}
 
 		// DOING EVERYTHING FOR NORWAY
 		for (int i = 0; i < LithuanianRefs.size(); i++) {
