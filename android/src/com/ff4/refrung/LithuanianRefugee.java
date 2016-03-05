@@ -3,6 +3,7 @@ package com.ff4.refrung;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -19,6 +20,7 @@ public class LithuanianRefugee {
 	private Texture[] refugee = new Texture[13];
 	private int index;
 	private int tickcount;
+	private ParticleEffect particles;
 	
 	public static final int DEFAULT_SPEED = (int) (Gdx.graphics.getHeight()*0.0040f);
 	public static final int SIZE = (int) (Gdx.graphics.getWidth()*0.185f);
@@ -31,7 +33,7 @@ public class LithuanianRefugee {
 		this.y = y;
 		this.speed = speed;
 		rect = new Rectangle(x,y,SIZE,SIZE);
-		
+		particles = new ParticleEffect(GameRunner.particles);
 		
 		refugee[0] = GameRunner.assets.get("Lithuanian/Lithuanian1.1.png");
 		refugee[1] = GameRunner.assets.get("Lithuanian/Lithuanian1.2.png");
@@ -71,8 +73,14 @@ public class LithuanianRefugee {
 		
 		tickcount++;
 		batch.begin();
+		if(Gdx.input.getAccelerometerX() > 3){
+			particles.setPosition(x + SIZE/2, y + SIZE/2);
+			particles.update(Gdx.graphics.getDeltaTime());
+//			particles.draw(batch);
+		}
 		batch.draw(refugee[index], x, y, SIZE, Gdx.graphics.getHeight()*0.126f);
 		batch.end();
+		
 		
 		if(debugMode){
 			shape.setAutoShapeType(true);

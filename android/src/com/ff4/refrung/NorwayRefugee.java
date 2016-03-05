@@ -3,6 +3,7 @@ package com.ff4.refrung;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -23,7 +24,7 @@ public class NorwayRefugee {
 	public static final int DEFAULT_SPEED = (int) (Gdx.graphics.getHeight()*0.0040f);
 	public static final int SIZE = (int) (Gdx.graphics.getWidth()*0.185f);
 
-
+	private ParticleEffect particles;
 	public Rectangle rect;
 	private boolean debugMode = true;
 	
@@ -31,6 +32,7 @@ public class NorwayRefugee {
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
+		particles = new ParticleEffect(GameRunner.particles);
 		rect = new Rectangle(x,y,SIZE,SIZE);
 		
 		refugee[0] = GameRunner.assets.get("Norway/Norway1.1.png");
@@ -66,6 +68,11 @@ public class NorwayRefugee {
 		
 		tickcount++;
 		batch.begin();
+		if(Gdx.input.getAccelerometerX() > 3){
+			particles.setPosition(x + SIZE/2, y + SIZE/2);
+			particles.update(Gdx.graphics.getDeltaTime());
+//			particles.draw(batch);
+		}
 		batch.draw(refugee[index], x, y, SIZE, Gdx.graphics.getHeight()*0.126f);
 		batch.end();
 		

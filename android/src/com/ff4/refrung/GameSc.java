@@ -86,15 +86,15 @@ public class GameSc implements Screen {
 
 						if(randRefugee == 0){
 							spawnLtRefugee(randX, Gdx.graphics.getHeight(),
-									Gdx.graphics.getHeight()*0.0050f /* TODO: handle uniform speed */);
+									LithuanianRefugee.DEFAULT_SPEED);
 						}
 						if(randRefugee == 1){						
 							spawnNorwegianRefugee(randX, Gdx.graphics.getHeight(),
-									Gdx.graphics.getHeight()*0.0050f /* TODO: handle uniform speed */);
+									NorwayRefugee.DEFAULT_SPEED);
 						}
 						if(randRefugee== 2){
 							spawnGermanRefugee(randX, Gdx.graphics.getHeight(),
-									Gdx.graphics.getHeight()*0.0050f /* TODO: handle uniform speed */);						
+									LithuanianRefugee.DEFAULT_SPEED);						
 						}
 
 
@@ -207,7 +207,7 @@ public class GameSc implements Screen {
 		}
 		for(int i =0; i<GermanRefs.size(); i++){
 			if(GermanRefs.get(i).rect.overlaps(NorwayPost)||GermanRefs.get(i).rect.overlaps(LithuanianPost)){
-				runner.setScreen(new GameOver(runner));
+//				runner.setScreen(new GameOver(runner));
 			}			
 		}
 		
@@ -224,12 +224,14 @@ public class GameSc implements Screen {
 		}
 		for(int i=0; i<NorwayRefs.size(); i++){
 			if(NorwayRefs.get(i).rect.overlaps(LithuanianPost) || NorwayRefs.get(i).rect.overlaps(GermanPost)){
-				runner.setScreen(new GameOver(runner));
+//				runner.setScreen(new GameOver(runner));
 			}
 		}
 		for(int i=0; i<NorwayRefs.size(); i++){
-			NorwayRefs.remove(i);
-			Score++;
+			if(NorwayRefs.get(i).rect.overlaps(NorwayPost)){
+				NorwayRefs.remove(i);
+				Score++;
+			}
 		}
 
 		// DOING EVERYTHING FOR NORWAY
@@ -243,7 +245,7 @@ public class GameSc implements Screen {
 		}
 		for(int i =0; i<LithuanianRefs.size(); i++){
 			if(LithuanianRefs.get(i).rect.overlaps(NorwayPost)||LithuanianRefs.get(i).rect.overlaps(GermanPost)){
-				runner.setScreen(new GameOver(runner));
+//				runner.setScreen(new GameOver(runner));
 			}			
 		}
 		for(int i = 0; i<LithuanianRefs.size(); i++){
