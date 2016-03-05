@@ -16,7 +16,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class GameSc implements Screen {
 	
-	private boolean debugMode = true;
+	private boolean debugMode = false;
 	public GameRunner runner;
 	public SpriteBatch batch;
 	public ShapeRenderer shape;
