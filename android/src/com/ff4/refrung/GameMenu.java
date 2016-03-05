@@ -14,17 +14,22 @@ public class GameMenu implements Screen{
 	private SpriteBatch batch;
 	private GameRunner runner;
 	private boolean isLoaded = false;
+	private Timer timer;
 	
 	public GameMenu(GameRunner runner){
 		this.runner = runner;
-		Timer t = new Timer();
-		t.schedule(new TimerTask() {
+		timer = new Timer("GameMenu");
+		
+		//Loading...
+		timer.schedule(new TimerTask() {
 			
 			@Override
 			public void run() {
 				isLoaded = true;
 			}
 		}, 2000);
+		//
+		
 	}
 
 	@Override
@@ -68,6 +73,7 @@ public class GameMenu implements Screen{
 
 	@Override
 	public void hide() {
+		timer.cancel();
 	}
 
 	@Override

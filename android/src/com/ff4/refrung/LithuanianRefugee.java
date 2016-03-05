@@ -59,7 +59,7 @@ public class LithuanianRefugee {
 		
 		tickcount++;
 		batch.begin();
-		batch.draw(refugee[index], x, y, SIZE, SIZE);
+		batch.draw(refugee[index], x, y, SIZE, Gdx.graphics.getHeight()*0.126f);
 		batch.end();
 		
 		if(debugMode){
