@@ -30,6 +30,7 @@ public class Terrorist {
 		this.speed = speed;
 		rect = new Rectangle(x,y,SIZE,SIZE);
 		
+		
 		refugee[0] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
 		refugee[1] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
 		refugee[2] = GameRunner.assets.get("Terrorist/Terrorist1.3.png");

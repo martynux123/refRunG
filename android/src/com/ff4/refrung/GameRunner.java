@@ -29,6 +29,7 @@ public class GameRunner extends Game{
 		assets.load("German/German1.3.png", Texture.class);
 		assets.load("German/German1.4.png", Texture.class);
 		
+		assets.load("gameOver.png", Texture.class);
 		
 		
 		assets.load("badlogic.jpg", Texture.class);

@@ -15,7 +15,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 public class GameSc implements Screen {
-
+	
+	private boolean debugMode = true;
 	public GameRunner runner;
 	public SpriteBatch batch;
 	public ShapeRenderer shape;
@@ -52,9 +53,9 @@ public class GameSc implements Screen {
 		GermanRefs = new ArrayList<GermanRefugee>();
 
 		// Posts
-		LithuanianPost = new Rectangle();
-		NorwayPost = new Rectangle();
-		GermanPost = new Rectangle();
+		LithuanianPost = new Rectangle(30,10,250,250);
+		NorwayPost = new Rectangle(380,10,250,250);
+		GermanPost = new Rectangle(730,10,250,250);
 
 		prefs = Gdx.app.getPreferences("Stats");
 		prefs.putInteger("Score", Score);
@@ -195,9 +196,11 @@ public class GameSc implements Screen {
 			if(GermanRefs.get(i).rect.overlaps(GermanPost)){
 				GermanRefs.remove(i);
 			}
+		}
+		for(int i =0; i<GermanRefs.size(); i++){
 			if(GermanRefs.get(i).rect.overlaps(NorwayPost)||GermanRefs.get(i).rect.overlaps(LithuanianPost)){
-				Gdx.app.exit();
-			}
+				runner.setScreen(new GameOver(runner));
+			}			
 		}
 		
 		/*
@@ -235,6 +238,17 @@ public class GameSc implements Screen {
 	shape.rect(380,10,250,250);
 	shape.setColor(Color.BLUE);
 	shape.rect(730,10,250,250);
+	if(debugMode){
+		shape.set(ShapeType.Line);
+		shape.setColor(Color.GREEN);
+		shape.rect(30,10,250,250);
+		shape.setColor(Color.WHITE);
+		shape.rect(380,10,250,250);
+		shape.setColor(Color.YELLOW);
+		shape.rect(730,10,250,250);
+		
+	}
+	
 	shape.end();
 
 	}

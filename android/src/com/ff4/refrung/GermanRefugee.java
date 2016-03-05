@@ -42,6 +42,9 @@ public class GermanRefugee {
 		refugee[9] = GameRunner.assets.get("German/German1.4.png");
 	}
 	public void render(SpriteBatch batch, ShapeRenderer shape){
+		
+		rect.setPosition(x, y);
+		
 		x-=Gdx.input.getAccelerometerX()*5;
 		y-=speed;
 		
