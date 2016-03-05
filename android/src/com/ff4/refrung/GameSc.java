@@ -20,6 +20,7 @@ public class GameSc implements Screen {
 	public SpriteBatch batch;
 	public ShapeRenderer shape;
 	private Preferences prefs;
+	private Texture txt;
 	private int Score;
 	private BitmapFont scoreFont;
 	private Texture[] hearts = new Texture[3];
@@ -43,7 +44,9 @@ public class GameSc implements Screen {
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 
-		Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		//Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		
+		txt = GameRunner.assets.get("background.jpg");
 		
 		hearts[0] = GameRunner.assets.get("hearts/1.png");
 		hearts[1] = GameRunner.assets.get("hearts/2.png");
@@ -180,6 +183,7 @@ public class GameSc implements Screen {
 		touchX = Gdx.input.getX();
 		touchY = Gdx.input.getY() + ((Gdx.graphics.getHeight() / 2 - Gdx.input.getY()) * 2);
 		batch.begin();
+		batch.draw(txt, 0,0 , Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		scoreFont.draw(batch, " " + prefs.getInteger("Score"), Gdx.graphics.getWidth() / 2 - (String.valueOf(Score).length() * 34),
 				Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() * 0.0462f);
 		batch.end();
@@ -237,13 +241,12 @@ public class GameSc implements Screen {
 		}
 
 		for (int i = 0; i < GermanRefs.size(); i++) {
-			if (GermanRefs.get(i).y < 0) {
+			if (GermanRefs.get(i).y < -10) {
 				GermanRefs.remove(i);
 			}
 		}
 		for(int i = 0; i<GermanRefs.size(); i++){
 			if(GermanRefs.get(i).rect.overlaps(GerPost.rect)){
-				GermanRefs.remove(i);
 				Score++;
 			}
 		}
@@ -261,7 +264,7 @@ public class GameSc implements Screen {
 			NorwayRefs.get(i).render(batch, shape);
 		}
 		for (int i = 0; i < NorwayRefs.size(); i++) {
-			if (NorwayRefs.get(i).y < 0) {
+			if (NorwayRefs.get(i).y < -10) {
 				NorwayRefs.remove(i);
 			}
 		}
@@ -273,7 +276,6 @@ public class GameSc implements Screen {
 		}
 		for(int i=0; i<NorwayRefs.size(); i++){
 			if(NorwayRefs.get(i).rect.overlaps(NorPost.rect)){
-				NorwayRefs.remove(i);
 				Score++;
 			}
 		}
@@ -283,7 +285,7 @@ public class GameSc implements Screen {
 			LithuanianRefs.get(i).render(batch, shape);
 		}
 		for (int i = 0; i < LithuanianRefs.size(); i++) {
-			if (LithuanianRefs.get(i).y < 0) {
+			if (LithuanianRefs.get(i).y < -10) {
 				LithuanianRefs.remove(i);
 			}
 		}
@@ -295,7 +297,6 @@ public class GameSc implements Screen {
 		}
 		for(int i = 0; i<LithuanianRefs.size(); i++){
 			if(LithuanianRefs.get(i).rect.overlaps(LTPost.rect)){
-				LithuanianRefs.remove(i);
 				Score++;
 			}
 		}
