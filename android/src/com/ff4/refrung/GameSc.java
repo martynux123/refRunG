@@ -149,7 +149,6 @@ public class GameSc implements Screen {
 		NorwayRefs.add(new NorwayRefugee(x, y, speed));
 
 	}
-
 	public void spawnGermanRefugee(float x, float y, float speed) {
 		GermanRefs.add(new GermanRefugee(x, y, speed));
 
@@ -193,8 +192,16 @@ public class GameSc implements Screen {
 		}
 		for (int i = 0; i < Terrorists.size(); i++) {
 			if (Gdx.input.justTouched() && Terrorists.get(i).rect.contains(touchX, touchY)) {
-//				Terrorists.remove(i);
 				Terrorists.get(i).explode();
+				//Explosion radius
+				Rectangle rect = new Rectangle(Terrorists.get(i).x - 200, Terrorists.get(i).y - 200, 600, 600);
+				
+				//Exploding
+				for (int j = 0; j < LithuanianRefs.size(); j++) {
+					if(LithuanianRefs.get(i).rect.overlaps(rect)){
+						runner.setScreen(new GameOver(runner));
+					}
+				}
 				Score++;
 			}
 		}

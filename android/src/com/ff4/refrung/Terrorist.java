@@ -87,7 +87,7 @@ public class Terrorist {
 			shape.end();
 		}
 		System.out.println();
-		if(isExploding){
+		if(isExploding){ 
 			batch.draw(explosion[explodeIndex], x - 200, y - 200, 600, 600);
 			
 			if(tickCount > 2){
