@@ -29,10 +29,12 @@ public class HelpScreen implements Screen{
 	private Texture[] LTRef = new Texture[13];
 	private Texture[] NRef = new Texture[7];
 	private Texture[] GerRef = new Texture[10];
+	private Texture txt;
 	
 	public HelpScreen(GameRunner runner){
 		shape = new ShapeRenderer();
 		batch = new SpriteBatch();
+		txt = GameRunner.assets.get("helperScreen.png");
 		this.runner = runner;
 		font = GameRunner.smallFont;
 		timer = new Timer("Tutorial anim");
@@ -101,6 +103,7 @@ public class HelpScreen implements Screen{
 		shape.end();
 		
 		batch.begin();
+		batch.draw(txt, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		font.draw(batch, "Norwegian refugee", Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*0.9f);
 		batch.draw(NRef[NanimIndex], Gdx.graphics.getWidth() * 0.4f, Gdx.graphics.getHeight()*0.65f, NorwayRefugee.SIZE*1.2f, Gdx.graphics.getHeight()*0.17f);
 		font.draw(batch, "German refugee", Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getHeight()*0.6f);

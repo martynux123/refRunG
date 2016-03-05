@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-
+ 
 public class GameRunner extends Game{
 	public static AssetManager assets;
 	public static BitmapFont font;
@@ -21,11 +21,16 @@ public class GameRunner extends Game{
 	public void create() {
 		
 		GameRunner.assets = new AssetManager();
+		
+		GameRunner.assets.load("terroristScreen.png", Texture.class);
+		
 		//Terrorist
 		GameRunner.assets.load("Terrorist/Terrorist1.1.png", Texture.class);
 		GameRunner.assets.load("Terrorist/Terrorist1.2.png", Texture.class);
 		GameRunner.assets.load("Terrorist/Terrorist1.3.png", Texture.class);
 		GameRunner.assets.load("Terrorist/Terrorist1.4.png", Texture.class);
+	
+		GameRunner.assets.load("credits.png", Texture.class);
 		
 		//German
 		GameRunner.assets.load("German/German1.1.png", Texture.class);
@@ -38,6 +43,7 @@ public class GameRunner extends Game{
 		GameRunner.assets.load("Norway/Norway1.2.png", Texture.class);
 		GameRunner.assets.load("Norway/Norway1.3.png", Texture.class);
 		GameRunner.assets.load("Norway/Norway1.4.png", Texture.class);
+		GameRunner.assets.load("helperScreen.png", Texture.class);
 		
 		//Lithuanian
 		GameRunner.assets.load("Lithuanian/Lithuanian1.1.png", Texture.class);
@@ -45,7 +51,9 @@ public class GameRunner extends Game{
 		GameRunner.assets.load("Lithuanian/Lithuanian1.3.png", Texture.class);
 		GameRunner.assets.load("Lithuanian/Lithuanian1.4.png", Texture.class);
 		
-		
+		GameRunner.assets.load("GermanPassport.png", Texture.class);
+		GameRunner.assets.load("LithuanianPassport.png", Texture.class);
+		GameRunner.assets.load("NorwayPassport.png", Texture.class);
 		
 		GameRunner.assets.load("Loading.png", Texture.class);
 		
@@ -74,8 +82,8 @@ public class GameRunner extends Game{
 		particles.scaleEffect(2f);
 		
 		
-//		setScreen(new GameMenu(this));
-		setScreen(new HelpScreen(this));
+	    setScreen(new GameMenu(this));
+		//setScreen(new HelpScreen(this));
 		
 		
 		
