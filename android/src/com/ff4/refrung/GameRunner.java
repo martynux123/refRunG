@@ -17,6 +17,7 @@ public class GameRunner extends Game{
 	public static ParticleEffect particles;
 	public static BitmapFont smallFont;
 	
+	
 	@Override
 	public void create() {
 		
@@ -31,6 +32,9 @@ public class GameRunner extends Game{
 		GameRunner.assets.load("Terrorist/Terrorist1.4.png", Texture.class);
 	
 		GameRunner.assets.load("credits.png", Texture.class);
+		
+		GameRunner.assets.load("gameover.png", Texture.class);
+		GameRunner.assets.load("gameover1.png", Texture.class);
 		
 		//German
 		GameRunner.assets.load("German/German1.1.png", Texture.class);
@@ -68,7 +72,6 @@ public class GameRunner extends Game{
 		GameRunner.assets.load("hearts/3.png", Texture.class);
 		
 
-		assets.load("gameOver.png", Texture.class);
 
 		GameRunner.assets.load("menu.png", Texture.class);
 		
@@ -79,11 +82,11 @@ public class GameRunner extends Game{
 		
 		FreeTypeFontGenerator fontgen = new FreeTypeFontGenerator(Gdx.files.internal("Font.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-		parameter.size = (int) (Gdx.graphics.getHeight()*0.092);
+		parameter.size = (int) (Gdx.graphics.getHeight()*0.05);
 		font = fontgen.generateFont(parameter);
 		
 		FreeTypeFontParameter parametersmall = new FreeTypeFontParameter();
-		parametersmall.size = (int) (Gdx.graphics.getHeight()*0.052);
+		parametersmall.size = (int) (Gdx.graphics.getHeight()*0.04);
 		smallFont = fontgen.generateFont(parametersmall);
 		
 		particles = new ParticleEffect();
