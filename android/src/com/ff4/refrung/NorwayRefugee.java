@@ -1,6 +1,7 @@
 package com.ff4.refrung;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
@@ -20,6 +21,7 @@ public class NorwayRefugee {
 	private Texture[] refugee = new Texture[7];
 	private int index;
 	private int tickcount;
+	private Preferences prefs;
 	
 	public static final int DEFAULT_SPEED = (int) (Gdx.graphics.getHeight()*0.0040f);
 	public static final int SIZE = (int) (Gdx.graphics.getWidth()*0.185f);
@@ -43,6 +45,12 @@ public class NorwayRefugee {
 		refugee[4] = GameRunner.assets.get("Norway/Norway1.2.png");
 		refugee[5] = GameRunner.assets.get("Norway/Norway1.3.png");
 		refugee[6] = GameRunner.assets.get("Norway/Norway1.4.png");
+		
+	}
+	public void die(){
+		
+		prefs = Gdx.app.getPreferences("Stats");
+		prefs.putInteger("Deaths", prefs.getInteger("Deaths")+1);
 		
 	}
 	public void render(SpriteBatch batch, ShapeRenderer shape){

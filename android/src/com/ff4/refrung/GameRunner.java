@@ -67,7 +67,7 @@ public class GameRunner extends Game{
 
 		assets.load("gameOver.png", Texture.class);
 
-		GameRunner.assets.load("badlogic.jpg", Texture.class);
+		GameRunner.assets.load("menu.png", Texture.class);
 		
 		
 		GameRunner.assets.finishLoading();

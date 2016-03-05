@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,8 +12,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-
-import android.R.anim;
 
 
 
@@ -26,6 +25,7 @@ public class HelpScreen implements Screen{
 	private int NanimIndex;
 	private int LTanimIndex;
 	private int GeranimIndex;
+	private Preferences prefs;
 	private Texture[] LTRef = new Texture[13];
 	private Texture[] NRef = new Texture[7];
 	private Texture[] GerRef = new Texture[10];
@@ -33,6 +33,9 @@ public class HelpScreen implements Screen{
 	
 	public HelpScreen(GameRunner runner){
 		shape = new ShapeRenderer();
+		
+		
+		
 		batch = new SpriteBatch();
 		txt = GameRunner.assets.get("helperScreen.png");
 		this.runner = runner;

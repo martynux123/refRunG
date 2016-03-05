@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,11 +18,16 @@ public class TerroristTutorial implements Screen {
 	private SpriteBatch batch;
 	private ShapeRenderer shape;
 	private Texture txt;
+	private Preferences prefs;
 	private Texture refugee[] = new Texture[7];
 	
 	public TerroristTutorial(GameRunner runner) {
 		this.runner = runner;
 		batch = new SpriteBatch();
+		prefs = Gdx.app.getPreferences("Stats");
+		prefs.putBoolean("FirstTIme", true);
+		prefs.flush();
+		
 		shape = new ShapeRenderer();
 		txt = GameRunner.assets.get("terroristScreen.png");
 		
@@ -60,6 +66,10 @@ public class TerroristTutorial implements Screen {
 		batch.draw(txt, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch.draw(refugee[TerroristAnimIndex], Gdx.graphics.getWidth()*0.38f, Gdx.graphics.getHeight()*0.62f, 300,400);
 		batch.end();
+		
+		if(Gdx.input.justTouched()){
+			runner.setScreen(new GameMenu(runner));
+		}
 
 	}
 	@Override
