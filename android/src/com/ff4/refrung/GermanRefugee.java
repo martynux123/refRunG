@@ -19,8 +19,9 @@ public class GermanRefugee {
 	private Texture[] refugee = new Texture[10];
 	private int tickcount;
 	
-	public static final int DEFAULT_SPEED = 8;
-	public static final int SIZE = 200;
+	public static final int DEFAULT_SPEED = (int) (Gdx.graphics.getHeight()*0.0040f);
+	public static final int SIZE = (int) (Gdx.graphics.getHeight()*0.185f);
+	
 	public Rectangle rect;
 	private boolean debugMode = false;
 	
@@ -64,14 +65,14 @@ public class GermanRefugee {
 		
 		tickcount++;
 		batch.begin();
-		batch.draw(refugee[index], x, y, SIZE, 250);
+		batch.draw(refugee[index], x, y, SIZE, Gdx.graphics.getHeight()*0.126f);
 		batch.end();
 		
 		if(debugMode){
 			shape.setAutoShapeType(true);
 			shape.setColor(Color.RED);
 			shape.begin(ShapeType.Line);
-			shape.rect(x, y, SIZE, 250);
+			shape.rect(x, y, SIZE, Gdx.graphics.getHeight()*0.126f);
 			shape.end();
 		}
 		

@@ -48,6 +48,7 @@ public class GameRunner extends Game{
 		GameRunner.assets.finishLoading();
 				
 		
+		
 		FreeTypeFontGenerator fontgen = new FreeTypeFontGenerator(Gdx.files.internal("Font.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = (int) (Gdx.graphics.getHeight()*0.092);
