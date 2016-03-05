@@ -57,6 +57,12 @@ public class GameRunner extends Game{
 		
 		GameRunner.assets.load("Loading.png", Texture.class);
 		
+		GameRunner.assets.load("explosion/1.png", Texture.class);
+		GameRunner.assets.load("explosion/2.png", Texture.class);
+		GameRunner.assets.load("explosion/3.png", Texture.class);
+		GameRunner.assets.load("explosion/4.png", Texture.class);
+		GameRunner.assets.load("explosion/5.png", Texture.class);
+		
 		
 
 		assets.load("gameOver.png", Texture.class);

@@ -26,7 +26,8 @@ public class NorwayRefugee {
 
 	private ParticleEffect particles;
 	public Rectangle rect;
-	private boolean debugMode = true;
+	private boolean debugMode = false;
+	
 	
 	public NorwayRefugee(float x, float y, float speed){
 		this.x = x;

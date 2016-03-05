@@ -1,5 +1,8 @@
 package com.ff4.refrung;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -24,13 +27,17 @@ public class Terrorist {
 	public static final int SIZE = 200;
 	public Rectangle rect;
 	private boolean debugMode = false;
+	public boolean isExploding = false;
+	private Texture[] explosion = new Texture[5];
+	private int tickCount = 0;
+	private int explodeIndex = 0;
+	public boolean isDead = false;
 	
 	public Terrorist(float x, float y, float speed){
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
 		rect = new Rectangle(x,y,SIZE,SIZE);
-		
 		
 		refugee[0] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
 		refugee[1] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
@@ -40,6 +47,11 @@ public class Terrorist {
 		refugee[5] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
 		refugee[6] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
 		
+		explosion[0] = GameRunner.assets.get("explosion/1.png");
+		explosion[1] = GameRunner.assets.get("explosion/2.png");
+		explosion[2] = GameRunner.assets.get("explosion/3.png");
+		explosion[3] = GameRunner.assets.get("explosion/4.png");
+		explosion[4] = GameRunner.assets.get("explosion/5.png");
 		
 	}
 	public void render(SpriteBatch batch, ShapeRenderer shape){
@@ -66,7 +78,6 @@ public class Terrorist {
 		tickcount++;
 		batch.begin();
 		batch.draw(refugee[index], x, y, SIZE, Gdx.graphics.getHeight()*0.126f);
-		batch.end();
 		
 		if(debugMode){
 			shape.setAutoShapeType(true);
@@ -75,7 +86,28 @@ public class Terrorist {
 			shape.rect(x, y, SIZE, SIZE);
 			shape.end();
 		}
+		System.out.println();
+		if(isExploding){
+			batch.draw(explosion[explodeIndex], x - 200, y - 200, 600, 600);
+			
+			if(tickCount > 2){
+				tickCount = 0;
+				explodeIndex++;
+			}
+			
+			if(explodeIndex > 4){
+				isDead = true;
+				isExploding = false;
+			}
+			
+			tickCount++;
+		}
+		batch.end();
 		
+	}
+	
+	public void explode(){
+		isExploding = true;
 	}
 
 }

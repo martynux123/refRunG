@@ -28,7 +28,7 @@ public class GameSc implements Screen {
 	private ArrayList<NorwayRefugee> NorwayRefs;
 	private ArrayList<LithuanianRefugee> LithuanianRefs;
 	private ArrayList<GermanRefugee> GermanRefs;
-	private ArrayList<Terrorist> Terrorist;
+	private ArrayList<Terrorist> Terrorists;
 
 	
 	private NorwayPost NorPost;
@@ -48,7 +48,7 @@ public class GameSc implements Screen {
 		scoreFont = GameRunner.font;
 
 		// Refugees List
-		Terrorist = new ArrayList<Terrorist>();
+		Terrorists = new ArrayList<Terrorist>();
 		NorwayRefs = new ArrayList<NorwayRefugee>();
 		LithuanianRefs = new ArrayList<LithuanianRefugee>();
 		GermanRefs = new ArrayList<GermanRefugee>();
@@ -67,6 +67,7 @@ public class GameSc implements Screen {
 
 	}
 
+	private float speed = LithuanianRefugee.DEFAULT_SPEED;
 	private void refuggeThread() {
 		new Thread(new Runnable() {
 
@@ -74,26 +75,29 @@ public class GameSc implements Screen {
 			public void run() {
 				while (runner.getScreen() == GameSc.this) {
 					long randTime = MathUtils.random(1000, 2500);
+					
 					try {
 						Thread.sleep(randTime);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					
+					speed+=0.3f;
 					int randRefugee = MathUtils.random(0, 2);
 					float randX = MathUtils.random(0, Gdx.graphics.getWidth() - LithuanianRefugee.SIZE);
 					
 
 						if(randRefugee == 0){
 							spawnLtRefugee(randX, Gdx.graphics.getHeight(),
-									LithuanianRefugee.DEFAULT_SPEED);
+									speed);
 						}
 						if(randRefugee == 1){						
 							spawnNorwegianRefugee(randX, Gdx.graphics.getHeight(),
-									NorwayRefugee.DEFAULT_SPEED);
+									speed);
 						}
 						if(randRefugee== 2){
 							spawnGermanRefugee(randX, Gdx.graphics.getHeight(),
-									LithuanianRefugee.DEFAULT_SPEED);						
+									speed);						
 						}
 
 
@@ -103,6 +107,7 @@ public class GameSc implements Screen {
 		}, "RefugeeThread").start();
 	}
 
+	private float terroristSpeed = Terrorist.DEFAULT_SPEED;
 	private void terroristThread() {
 		new Thread(new Runnable() {
 
@@ -116,12 +121,14 @@ public class GameSc implements Screen {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					
+					terroristSpeed+=0.4;
 
 					float randX = MathUtils.random(0, Gdx.graphics
 							.getWidth() /* TODO: handle uniform size */);
 
 					spawnTerrorist(randX, Gdx.graphics.getHeight(),
-							Gdx.graphics.getHeight()*0.0050f /* TODO: handle uniform speed */);
+							terroristSpeed);
 
 				}
 				Thread.currentThread().interrupt();
@@ -130,7 +137,7 @@ public class GameSc implements Screen {
 	}
 
 	public void spawnTerrorist(float x, float y, float speed) {
-		Terrorist.add(new Terrorist(x, y, speed));
+		Terrorists.add(new Terrorist(x, y, speed));
 	}
 
 	public void spawnLtRefugee(float x, float y, float speed) {
@@ -176,20 +183,26 @@ public class GameSc implements Screen {
 		GerPost.render(batch, shape);
 		
 		// DOING EVERYTHING FOR TERRORIST
-		for (int i = 0; i < Terrorist.size(); i++) {
-			Terrorist.get(i).render(batch, shape);
+		for (int i = 0; i < Terrorists.size(); i++) {
+			Terrorists.get(i).render(batch, shape);
 		}
-		for (int i = 0; i < Terrorist.size(); i++) {
-			if (Terrorist.get(i).y < Gdx.graphics.getHeight()*0.131f) {
+		for (int i = 0; i < Terrorists.size(); i++) {
+			if (Terrorists.get(i).y < Gdx.graphics.getHeight()*0.131f) {
 				runner.setScreen(new GameOver(runner));
 			}
 		}
-		for (int i = 0; i < Terrorist.size(); i++) {
-			if (Gdx.input.justTouched() && Terrorist.get(i).rect.contains(touchX, touchY)) {
-				Terrorist.remove(i);
+		for (int i = 0; i < Terrorists.size(); i++) {
+			if (Gdx.input.justTouched() && Terrorists.get(i).rect.contains(touchX, touchY)) {
+//				Terrorists.remove(i);
+				Terrorists.get(i).explode();
 				Score++;
 			}
 		}
+		for (int i = 0; i < Terrorists.size(); i++) {
+			if(Terrorists.get(i).isDead)
+				Terrorists.remove(i);
+		}
+		
 
 		// DOING EVERYTHING FOR GERMAN
 		for (int i = 0; i < GermanRefs.size(); i++) {
