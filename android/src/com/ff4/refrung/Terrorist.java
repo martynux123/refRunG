@@ -64,7 +64,7 @@ public class Terrorist {
 		
 		tickcount++;
 		batch.begin();
-		batch.draw(refugee[index], x, y, SIZE, 250);
+		batch.draw(refugee[index], x, y, SIZE, Gdx.graphics.getHeight()*0.126f);
 		batch.end();
 		
 		if(debugMode){

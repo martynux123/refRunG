@@ -20,7 +20,7 @@ public class GermanRefugee {
 	private int tickcount;
 	
 	public static final int DEFAULT_SPEED = (int) (Gdx.graphics.getHeight()*0.0040f);
-	public static final int SIZE = (int) (Gdx.graphics.getHeight()*0.185f);
+	public static final int SIZE = (int) (Gdx.graphics.getWidth()*0.185f);
 	
 	public Rectangle rect;
 	private boolean debugMode = false;

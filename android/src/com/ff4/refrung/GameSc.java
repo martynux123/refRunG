@@ -75,7 +75,7 @@ public class GameSc implements Screen {
 
 			@Override
 			public void run() {
-				while (true) {
+				while (runner.getScreen() == GameSc.this) {
 					long randTime = MathUtils.random(1000, 2500);
 					int randRefugee = MathUtils.random(0, 3);
 
@@ -86,7 +86,7 @@ public class GameSc implements Screen {
 					}
 
 					float randX = MathUtils.random(0, Gdx.graphics
-							.getWidth() /* TODO: handle uniform size */);
+							.getWidth() - LithuanianRefugee.SIZE);
 
 					switch (randRefugee) {
 					case 0:
@@ -104,8 +104,9 @@ public class GameSc implements Screen {
 					}
 
 				}
+				Thread.currentThread().interrupt();
 			}
-		}).start();
+		}, "RefugeeThread").start();
 	}
 
 	private void terroristThread() {
@@ -113,7 +114,7 @@ public class GameSc implements Screen {
 
 			@Override
 			public void run() {
-				while (true) {
+				while (runner.getScreen() == GameSc.this) {
 					long randTime = MathUtils.random(1000, 4000);
 
 					try {
@@ -129,8 +130,9 @@ public class GameSc implements Screen {
 							Gdx.graphics.getHeight()*0.0050f /* TODO: handle uniform speed */);
 
 				}
+				Thread.currentThread().interrupt();
 			}
-		}).start();
+		}, "Terrorist thread").start();
 	}
 
 	public void spawnTerrorist(float x, float y, float speed) {
