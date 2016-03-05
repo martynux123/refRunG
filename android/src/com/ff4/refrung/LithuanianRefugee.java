@@ -20,9 +20,10 @@ public class LithuanianRefugee {
 	private int tickcount;
 	
 	public static final int DEFAULT_SPEED = (int) (Gdx.graphics.getHeight()*0.0040f);
-	public static final int SIZE = (int) (Gdx.graphics.getHeight()*0.185f);
+	public static final int SIZE = (int) (Gdx.graphics.getWidth()*0.185f);
+	
 	public Rectangle rect;
-	private boolean debugMode = false;
+	private boolean debugMode = true;
 	
 	public LithuanianRefugee(float x, float y, float speed){
 		this.x = x;
@@ -47,6 +48,9 @@ public class LithuanianRefugee {
 	}
 	
 	public void render(SpriteBatch batch, ShapeRenderer shape){
+		
+		rect.setPosition(x, y);
+		
 		x-=Gdx.input.getAccelerometerX()*5;
 		y-=speed;
 		

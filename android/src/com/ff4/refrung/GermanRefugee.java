@@ -23,7 +23,7 @@ public class GermanRefugee {
 	public static final int SIZE = (int) (Gdx.graphics.getWidth()*0.185f);
 	
 	public Rectangle rect;
-	private boolean debugMode = false;
+	private boolean debugMode = true;
 	
 	public GermanRefugee(float x, float y, float speed){
 		this.x = x;

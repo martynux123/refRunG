@@ -53,20 +53,18 @@ public class GameSc implements Screen {
 		GermanRefs = new ArrayList<GermanRefugee>();
 
 		// Posts
-		LithuanianPost = new Rectangle(Gdx.graphics.getWidth()*0.027f,
-				Gdx.graphics.getHeight()*0.005f,Gdx.graphics.getHeight()*0.231f,Gdx.graphics.getHeight()*0.231f);
+		LithuanianPost = new Rectangle(10, 10, Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
 		
-		NorwayPost = new Rectangle(Gdx.graphics.getWidth()*0.351f,Gdx.graphics.getHeight()*0.005f,
-				Gdx.graphics.getHeight()*0.231f,Gdx.graphics.getHeight()*0.231f);
-		GermanPost = new Rectangle(Gdx.graphics.getWidth()*0.675f,Gdx.graphics.getHeight()*0.005f,
-				Gdx.graphics.getHeight()*0.231f,Gdx.graphics.getHeight()*0.231f);
+		NorwayPost = new Rectangle(380, 10
+				,Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
+		GermanPost = new Rectangle(780,10,
+				Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
 
 		prefs = Gdx.app.getPreferences("Stats");
-		prefs.putInteger("Score", Score);
-		prefs.flush();
+		
 
-		refuggeThread();
 		terroristThread();
+		refuggeThread();
 
 	}
 
@@ -77,31 +75,28 @@ public class GameSc implements Screen {
 			public void run() {
 				while (runner.getScreen() == GameSc.this) {
 					long randTime = MathUtils.random(1000, 2500);
-					int randRefugee = MathUtils.random(0, 3);
-
 					try {
 						Thread.sleep(randTime);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					int randRefugee = MathUtils.random(0, 2);
+					float randX = MathUtils.random(0, Gdx.graphics.getWidth() - LithuanianRefugee.SIZE);
+					
 
-					float randX = MathUtils.random(0, Gdx.graphics
-							.getWidth() - LithuanianRefugee.SIZE);
+						if(randRefugee == 0){
+							spawnLtRefugee(randX, Gdx.graphics.getHeight(),
+									Gdx.graphics.getHeight()*0.0050f /* TODO: handle uniform speed */);
+						}
+						if(randRefugee == 1){						
+							spawnNorwegianRefugee(randX, Gdx.graphics.getHeight(),
+									Gdx.graphics.getHeight()*0.0050f /* TODO: handle uniform speed */);
+						}
+						if(randRefugee== 2){
+							spawnGermanRefugee(randX, Gdx.graphics.getHeight(),
+									Gdx.graphics.getHeight()*0.0050f /* TODO: handle uniform speed */);						
+						}
 
-					switch (randRefugee) {
-					case 0:
-						spawnLtRefugee(randX, Gdx.graphics.getHeight(),
-								Gdx.graphics.getHeight()*0.0050f /* TODO: handle uniform speed */);
-						break;
-					case 1:
-						spawnNorwegianRefugee(randX, Gdx.graphics.getHeight(),
-								Gdx.graphics.getHeight()*0.0050f /* TODO: handle uniform speed */);
-						break;
-					case 2:
-						spawnGermanRefugee(randX, Gdx.graphics.getHeight(),
-								Gdx.graphics.getHeight()*0.0050f /* TODO: handle uniform speed */);
-						break;
-					}
 
 				}
 				Thread.currentThread().interrupt();
@@ -162,14 +157,19 @@ public class GameSc implements Screen {
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		System.out.println(Terrorist.size());
-
+		
+		prefs.putInteger("Score", Score);
+		prefs.flush();
+		
+		if(prefs.getInteger("Highscore")<prefs.getInteger("Score")){
+			prefs.putInteger("Highscore", Score);
+		}
+		
 		touchX = Gdx.input.getX();
 		touchY = Gdx.input.getY() + ((Gdx.graphics.getHeight() / 2 - Gdx.input.getY()) * 2);
 		batch.begin();
-		scoreFont.draw(batch, " " + prefs.getInteger("Score", Score), Gdx.graphics.getWidth() / 2,
-				Gdx.graphics.getHeight() / 2);
+		scoreFont.draw(batch, " " + prefs.getInteger("Score"), Gdx.graphics.getWidth() / 2 - (String.valueOf(Score).length() * 34),
+				Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() * 0.0462f);
 		batch.end();
 
 
@@ -178,13 +178,14 @@ public class GameSc implements Screen {
 			Terrorist.get(i).render(batch, shape);
 		}
 		for (int i = 0; i < Terrorist.size(); i++) {
-			if (Terrorist.get(i).y < 0) {
-				Terrorist.remove(i);
+			if (Terrorist.get(i).y < Gdx.graphics.getHeight()*0.131f) {
+				runner.setScreen(new GameOver(runner));
 			}
 		}
 		for (int i = 0; i < Terrorist.size(); i++) {
 			if (Gdx.input.justTouched() && Terrorist.get(i).rect.contains(touchX, touchY)) {
 				Terrorist.remove(i);
+				Score++;
 			}
 		}
 
@@ -201,6 +202,7 @@ public class GameSc implements Screen {
 		for(int i = 0; i<GermanRefs.size(); i++){
 			if(GermanRefs.get(i).rect.overlaps(GermanPost)){
 				GermanRefs.remove(i);
+				Score++;
 			}
 		}
 		for(int i =0; i<GermanRefs.size(); i++){
@@ -208,6 +210,7 @@ public class GameSc implements Screen {
 				runner.setScreen(new GameOver(runner));
 			}			
 		}
+		
 		
 		/*
 		// DOING EVERYTHING FOR NORWAY
@@ -220,7 +223,7 @@ public class GameSc implements Screen {
 			}
 		}
 */
-/*
+
 		// DOING EVERYTHING FOR NORWAY
 		for (int i = 0; i < LithuanianRefs.size(); i++) {
 			LithuanianRefs.get(i).render(batch, shape);
@@ -230,31 +233,42 @@ public class GameSc implements Screen {
 				LithuanianRefs.remove(i);
 			}
 		}
-
+		for(int i =0; i<LithuanianRefs.size(); i++){
+			if(LithuanianRefs.get(i).rect.overlaps(NorwayPost)||LithuanianRefs.get(i).rect.overlaps(GermanPost)){
+				runner.setScreen(new GameOver(runner));
+			}			
+		}
+		for(int i = 0; i<LithuanianRefs.size(); i++){
+			if(LithuanianRefs.get(i).rect.overlaps(LithuanianPost)){
+				LithuanianRefs.remove(i);
+				Score++;
+			}
+		}
 
 	
-*/
+
 	// Out of bounds
 
 	shape.setAutoShapeType(true);
 	shape.begin(ShapeType.Filled);
 	shape.setColor(Color.BLACK);
-	shape.rect(30,10,250,250);
+	shape.rect(10, 10, Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
 	shape.setColor(Color.GREEN);
-	shape.rect(380,10,250,250);
+	shape.rect(380, 10
+			,Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
 	shape.setColor(Color.BLUE);
-	shape.rect(730,10,250,250);
+	shape.rect(780,10,
+			Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
 	if(debugMode){
 		shape.set(ShapeType.Line);
 		shape.setColor(Color.GREEN);
-		shape.rect(Gdx.graphics.getWidth()*0.027f,
-				Gdx.graphics.getHeight()*0.005f,Gdx.graphics.getHeight()*0.231f,Gdx.graphics.getHeight()*0.231f);
+		shape.rect(10, 10, Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
 		shape.setColor(Color.WHITE);
-		shape.rect(Gdx.graphics.getWidth()*0.351f,Gdx.graphics.getHeight()*0.005f,
-				Gdx.graphics.getHeight()*0.231f,Gdx.graphics.getHeight()*0.231f);
+		shape.rect(380, 10
+				,Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
 		shape.setColor(Color.YELLOW);
-		shape.rect(Gdx.graphics.getWidth()*0.675f,Gdx.graphics.getHeight()*0.005f,
-				Gdx.graphics.getHeight()*0.231f,Gdx.graphics.getHeight()*0.231f);
+		shape.rect(780,10,
+				Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
 		
 	}
 	

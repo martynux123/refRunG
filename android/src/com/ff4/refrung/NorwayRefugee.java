@@ -25,7 +25,7 @@ public class NorwayRefugee {
 
 
 	public Rectangle rect;
-	private boolean debugMode = false;
+	private boolean debugMode = true;
 	
 	public NorwayRefugee(float x, float y, float speed){
 		this.x = x;
