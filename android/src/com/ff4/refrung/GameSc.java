@@ -165,15 +165,6 @@ public class GameSc implements Screen {
 				Gdx.graphics.getHeight() / 2);
 		batch.end();
 
-		touchX = Gdx.input.getX();
-		touchY = Gdx.input.getY() + ((Gdx.graphics.getHeight() / 2 - Gdx.input.getY()) * 2);
-
-		batch.begin();
-
-		GameRunner.font.draw(batch, " " + prefs.getInteger("Score", Score), Gdx.graphics.getWidth() / 2,
-				Gdx.graphics.getHeight() / 2);
-
-		batch.end();
 
 		// DOING EVERYTHING FOR TERRORIST
 		for (int i = 0; i < Terrorist.size(); i++) {
@@ -183,28 +174,10 @@ public class GameSc implements Screen {
 			if (Terrorist.get(i).y < 0) {
 				Terrorist.remove(i);
 			}
-			// <<<<<<< HEAD
-		}
-		for (int i = 0; i < Terrorist.size(); i++) {
-			if (Terrorist.get(i).rect.contains(touchX, touchY) && Gdx.input.justTouched()) {
-				Terrorist.remove(i);
-				Score++;
-			}
 		}
 		for (int i = 0; i < Terrorist.size(); i++) {
 			if (Gdx.input.justTouched() && Terrorist.get(i).rect.contains(touchX, touchY)) {
 				Terrorist.remove(i);
-				Score++;
-			}
-		}
-		
-		// DOING EVERYTHING FOR NORWAY
-		for (int i = 0; i < NorwayRefs.size(); i++) {
-			NorwayRefs.get(i).render(batch, shape);
-		}
-		for (int i = 0; i < NorwayRefs.size(); i++) {
-			if (NorwayRefs.get(i).y < 0) {
-				NorwayRefs.remove(i);
 			}
 		}
 
@@ -218,7 +191,27 @@ public class GameSc implements Screen {
 				GermanRefs.remove(i);
 			}
 		}
-
+		for(int i = 0; i<GermanRefs.size(); i++){
+			if(GermanRefs.get(i).rect.overlaps(GermanPost)){
+				GermanRefs.remove(i);
+			}
+			if(GermanRefs.get(i).rect.overlaps(NorwayPost)||GermanRefs.get(i).rect.overlaps(LithuanianPost)){
+				Gdx.app.exit();
+			}
+		}
+		
+		/*
+		// DOING EVERYTHING FOR NORWAY
+		for (int i = 0; i < NorwayRefs.size(); i++) {
+			NorwayRefs.get(i).render(batch, shape);
+		}
+		for (int i = 0; i < NorwayRefs.size(); i++) {
+			if (NorwayRefs.get(i).y < 0) {
+				NorwayRefs.remove(i);
+			}
+		}
+*/
+/*
 		// DOING EVERYTHING FOR NORWAY
 		for (int i = 0; i < LithuanianRefs.size(); i++) {
 			LithuanianRefs.get(i).render(batch, shape);
@@ -230,20 +223,8 @@ public class GameSc implements Screen {
 		}
 
 
-		for (int i = 0; i < NorwayRefs.size(); i++) {
-			if (NorwayRefs.get(i).y < 0)
-				NorwayRefs.remove(i);
-		}
-
-	for(int i = 0;i<GermanRefs.size();i++){
-		
-		if (GermanRefs.get(i).y < 0)
-			GermanRefs.remove(i);
-		
-		if (GermanRefs.get(i).y < 0)
-			GermanRefs.remove(i);
-	} 
 	
+*/
 	// Out of bounds
 
 	shape.setAutoShapeType(true);

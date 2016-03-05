@@ -22,7 +22,7 @@ public class Terrorist {
 	public static final int DEFAULT_SPEED = 8;
 	public static final int SIZE = 200;
 	public Rectangle rect;
-	private boolean debugMode = true;
+	private boolean debugMode = false;
 	
 	public Terrorist(float x, float y, float speed){
 		this.x = x;
@@ -30,13 +30,13 @@ public class Terrorist {
 		this.speed = speed;
 		rect = new Rectangle(x,y,SIZE,SIZE);
 		
-		refugee[0] = GameRunner.assets.get("Terrorist1.1.png");
-		refugee[1] = GameRunner.assets.get("Terrorist1.2.png");
-		refugee[2] = GameRunner.assets.get("Terrorist1.3.png");
-		refugee[3] = GameRunner.assets.get("Terrorist1.4.png");
-		refugee[4] = GameRunner.assets.get("Terrorist1.1.png");
-		refugee[5] = GameRunner.assets.get("Terrorist1.2.png");
-		refugee[6] = GameRunner.assets.get("Terrorist1.4.png");
+		refugee[0] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
+		refugee[1] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
+		refugee[2] = GameRunner.assets.get("Terrorist/Terrorist1.3.png");
+		refugee[3] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
+		refugee[4] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
+		refugee[5] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
+		refugee[6] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
 		
 		
 	}

@@ -19,10 +19,17 @@ public class GameRunner extends Game{
 		
 		assets = new AssetManager();
 		
-		assets.load("Terrorist1.1.png", Texture.class);
-		assets.load("Terrorist1.2.png", Texture.class);
-		assets.load("Terrorist1.3.png", Texture.class);
-		assets.load("Terrorist1.4.png", Texture.class);
+		assets.load("Terrorist/Terrorist1.1.png", Texture.class);
+		assets.load("Terrorist/Terrorist1.2.png", Texture.class);
+		assets.load("Terrorist/Terrorist1.3.png", Texture.class);
+		assets.load("Terrorist/Terrorist1.4.png", Texture.class);
+		
+		assets.load("German/German1.1.png", Texture.class);
+		assets.load("German/German1.2.png", Texture.class);
+		assets.load("German/German1.3.png", Texture.class);
+		assets.load("German/German1.4.png", Texture.class);
+		
+		
 		
 		assets.load("badlogic.jpg", Texture.class);
 		

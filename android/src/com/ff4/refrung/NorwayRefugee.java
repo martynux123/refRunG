@@ -30,13 +30,13 @@ public class NorwayRefugee {
 		this.speed = speed;
 		rect = new Rectangle(x,y,SIZE,SIZE);
 		
-		refugee[0] = GameRunner.assets.get("Terrorist1.1.png");
-		refugee[1] = GameRunner.assets.get("Terrorist1.2.png");
-		refugee[2] = GameRunner.assets.get("Terrorist1.3.png");
-		refugee[3] = GameRunner.assets.get("Terrorist1.4.png");
-		refugee[4] = GameRunner.assets.get("Terrorist1.1.png");
-		refugee[5] = GameRunner.assets.get("Terrorist1.2.png");
-		refugee[6] = GameRunner.assets.get("Terrorist1.4.png");
+		refugee[0] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
+		refugee[1] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
+		refugee[2] = GameRunner.assets.get("Terrorist/Terrorist1.3.png");
+		refugee[3] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
+		refugee[4] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
+		refugee[5] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
+		refugee[6] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
 		
 	}
 	public void render(SpriteBatch batch, ShapeRenderer shape){
@@ -59,7 +59,7 @@ public class NorwayRefugee {
 		
 		tickcount++;
 		batch.begin();
-		batch.draw(refugee[index], x, y, SIZE, SIZE);
+		batch.draw(refugee[index], x, y, SIZE, 250);
 		batch.end();
 		
 		if(debugMode){
