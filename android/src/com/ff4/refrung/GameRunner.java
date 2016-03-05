@@ -25,16 +25,23 @@ public class GameRunner extends Game{
 	public void create() {
 		
 		GameRunner.assets = new AssetManager();
-		
+		//Terrorist
 		GameRunner.assets.load("Terrorist/Terrorist1.1.png", Texture.class);
 		GameRunner.assets.load("Terrorist/Terrorist1.2.png", Texture.class);
 		GameRunner.assets.load("Terrorist/Terrorist1.3.png", Texture.class);
 		GameRunner.assets.load("Terrorist/Terrorist1.4.png", Texture.class);
 		
+		//German
 		GameRunner.assets.load("German/German1.1.png", Texture.class);
 		GameRunner.assets.load("German/German1.2.png", Texture.class);
 		GameRunner.assets.load("German/German1.3.png", Texture.class);
 		GameRunner.assets.load("German/German1.4.png", Texture.class);
+		
+		//Lithuanian
+		GameRunner.assets.load("Lithuanian/Lithuanian1.1.png", Texture.class);
+		GameRunner.assets.load("Lithuanian/Lithuanian1.2.png", Texture.class);
+		GameRunner.assets.load("Lithuanian/Lithuanian1.3.png", Texture.class);
+		GameRunner.assets.load("Lithuanian/Lithuanian1.4.png", Texture.class);
 		
 		GameRunner.assets.load("Loading.png", Texture.class);
 		

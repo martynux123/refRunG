@@ -15,12 +15,12 @@ public class LithuanianRefugee {
 	public float x;
 	public float y;
 	private float speed;
-	private Texture[] refugee = new Texture[7];
+	private Texture[] refugee = new Texture[13];
 	private int index;
 	private int tickcount;
 	
-	public static final int DEFAULT_SPEED = 8;
-	public static final int SIZE = 150;
+	public static final int DEFAULT_SPEED = (int) (Gdx.graphics.getHeight()*0.0040f);
+	public static final int SIZE = (int) (Gdx.graphics.getHeight()*0.185f);
 	public Rectangle rect;
 	private boolean debugMode = false;
 	
@@ -31,14 +31,21 @@ public class LithuanianRefugee {
 		rect = new Rectangle(x,y,SIZE,SIZE);
 		
 		
-		refugee[0] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
-		refugee[1] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
-		refugee[2] = GameRunner.assets.get("Terrorist/Terrorist1.3.png");
-		refugee[3] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
-		refugee[4] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
-		refugee[5] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
-		refugee[6] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
+		refugee[0] = GameRunner.assets.get("Lithuanian/Lithuanian1.1.png");
+		refugee[1] = GameRunner.assets.get("Lithuanian/Lithuanian1.2.png");
+		refugee[2] = GameRunner.assets.get("Lithuanian/Lithuanian1.3.png");
+		refugee[3] = GameRunner.assets.get("Lithuanian/Lithuanian1.1.png");
+		refugee[4] = GameRunner.assets.get("Lithuanian/Lithuanian1.2.png");
+		refugee[5] = GameRunner.assets.get("Lithuanian/Lithuanian1.3.png");
+		refugee[6] = GameRunner.assets.get("Lithuanian/Lithuanian1.1.png");
+		refugee[7] = GameRunner.assets.get("Lithuanian/Lithuanian1.2.png");
+		refugee[8] = GameRunner.assets.get("Lithuanian/Lithuanian1.3.png");
+		refugee[9] = GameRunner.assets.get("Lithuanian/Lithuanian1.1.png");
+		refugee[10] = GameRunner.assets.get("Lithuanian/Lithuanian1.2.png");
+		refugee[11] = GameRunner.assets.get("Lithuanian/Lithuanian1.3.png");
+		refugee[12] = GameRunner.assets.get("Lithuanian/Lithuanian1.4.png");
 	}
+	
 	public void render(SpriteBatch batch, ShapeRenderer shape){
 		x-=Gdx.input.getAccelerometerX()*5;
 		y-=speed;
@@ -47,7 +54,7 @@ public class LithuanianRefugee {
 			tickcount = 0;
 			index++;
 		}
-		if(index>6){
+		if(index>12){
 			index = 0;
 		}
 		if(x<0){
@@ -59,7 +66,7 @@ public class LithuanianRefugee {
 		
 		tickcount++;
 		batch.begin();
-		batch.draw(refugee[index], x, y, SIZE, SIZE);
+		batch.draw(refugee[index], x, y, SIZE, Gdx.graphics.getHeight()*0.126f);
 		batch.end();
 		
 		if(debugMode){
