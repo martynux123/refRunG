@@ -4,10 +4,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Rectangle;
 
 public class GameMenu implements Screen{
 	
@@ -16,12 +21,19 @@ public class GameMenu implements Screen{
 	private GameRunner runner;
 	private boolean isLoaded = false;
 	private Timer timer;
+	private Preferences prefs;
 	private BitmapFont taptoPlay;
+	private Rectangle infoRectangle;
+	private Rectangle playButton;
+	private ShapeRenderer shape;
 	
 	public GameMenu(GameRunner runner){
 		this.runner = runner;
 		timer = new Timer("GameMenu");
-		
+		infoRectangle = new Rectangle(50, Gdx.graphics.getHeight()/3, 200,200);
+		playButton = new Rectangle(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/3, 300,300);
+		shape = new ShapeRenderer();
+		prefs = Gdx.app.getPreferences("Stats");
 		//Loading...
 		timer.schedule(new TimerTask() {
 			
@@ -39,7 +51,7 @@ public class GameMenu implements Screen{
 	public void show() {
 		Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
 		batch = new SpriteBatch();
-		background = GameRunner.assets.get("badlogic.jpg");
+		background = GameRunner.assets.get("menu.png");
 	}
 
 	@Override
@@ -49,18 +61,37 @@ public class GameMenu implements Screen{
 		batch.draw((Texture) GameRunner.assets.get("Loading.png"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch.end();
 	
+	
+		int touchX = Gdx.input.getX();
+		int touchY = Gdx.input.getY() + ((Gdx.graphics.getHeight() / 2 - Gdx.input.getY()) * 2);
 		//Drawing background
 		if(isLoaded){
 			batch.begin();
 			batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-			taptoPlay.draw(batch, "Tap to play", Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/4);
 			batch.end();
 		
+			shape.setAutoShapeType(true);
+			shape.begin(ShapeType.Line);
+			shape.setColor(Color.BLUE);
+			shape.rect(50, Gdx.graphics.getHeight()/3, 200,200);
+			shape.rect(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/4, 300,300);
+			shape.end();
+			
 		//Changing screen
-		if(Gdx.input.justTouched()){
-			runner.setScreen(new GameSc(runner));
+			System.out.println(prefs.getBoolean("FirstTIme"));
+		if(Gdx.input.justTouched()&& playButton.contains(touchX, touchY)){
+			if(prefs.getBoolean("FirstTIme")==false){
+				runner.setScreen(new HelpScreen(runner));	
+				
+			}
+			if(prefs.getBoolean("FirstTIme")==true){				
+				runner.setScreen(new GameSc(runner));
+			}
 		}
-		
+			
+		if(Gdx.input.justTouched() &&infoRectangle.contains(touchX, touchY)){
+			runner.setScreen(new HelpScreen(runner));
+		}
 		}
 	}
 
