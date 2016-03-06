@@ -3,12 +3,15 @@ package com.ff4.refrung;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 
 public class GameOver implements Screen {
 	
@@ -19,10 +22,15 @@ public class GameOver implements Screen {
 	private BitmapFont scoreDisplay;	
 	private Preferences prefs;
 	private int index;
+	private Rectangle playAgain;
+	private Rectangle menuButton;
+	
 	public GameOver(GameRunner runner){
 		this.runner = runner;
 		
 		index = MathUtils.random(0,1);
+		playAgain = new Rectangle(20,20,500, 200);
+		menuButton = new Rectangle(Gdx.graphics.getWidth()/2,20,500,200);
 		
 		switch(index){
 		case 0: 
@@ -56,18 +64,22 @@ public class GameOver implements Screen {
 		
 		batch.begin();
 		batch.draw(gameOver, 0, 0 , Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		scoreDisplay.draw(batch, "Best: " + prefs.getInteger("Highscore") , Gdx.graphics.getWidth()/2+20,
+		scoreDisplay.draw(batch, "Best: " + prefs.getInteger("Highscore") , Gdx.graphics.getWidth()/2+30,
 				Gdx.graphics.getHeight()-380);
 		scoreDisplay.draw(batch, "Score: " + prefs.getInteger("Score") 
-		, Gdx.graphics.getWidth()/8, Gdx.graphics.getHeight()-380);
+		, Gdx.graphics.getWidth()/14, Gdx.graphics.getHeight()-380);
 		batch.end();
 		
+		int touchX = Gdx.input.getX();
+		int touchY = Gdx.input.getY() + ((Gdx.graphics.getHeight() / 2 - Gdx.input.getY()) * 2);
 		
-		if(Gdx.input.justTouched()){
+		if(Gdx.input.justTouched()&& playAgain.contains(touchX, touchY)){
+			runner.setScreen(new GameSc(runner));
+		}
+		if(Gdx.input.justTouched()&& menuButton.contains(touchX, touchY)){
 			runner.setScreen(new GameMenu(runner));
 		}
-		
-		
+ 
 	}
 
 	@Override

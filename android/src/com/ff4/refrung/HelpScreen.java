@@ -107,11 +107,11 @@ public class HelpScreen implements Screen{
 		
 		batch.begin();
 		batch.draw(txt, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		font.draw(batch, "Norwegian refugee", Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*0.9f);
+		//font.draw(batch, "Norwegian refugee", Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*0.9f);
 		batch.draw(NRef[NanimIndex], Gdx.graphics.getWidth() * 0.4f, Gdx.graphics.getHeight()*0.65f, NorwayRefugee.SIZE*1.2f, Gdx.graphics.getHeight()*0.17f);
-		font.draw(batch, "German refugee", Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getHeight()*0.6f);
+		//font.draw(batch, "German refugee", Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getHeight()*0.6f);
 		batch.draw(GerRef[GeranimIndex], Gdx.graphics.getWidth() * 0.4f, Gdx.graphics.getHeight()*0.35f, LithuanianRefugee.SIZE*1.2f, Gdx.graphics.getHeight()*0.17f);
-		font.draw(batch, "Lithuanian refugee", Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*0.3f);
+		//font.draw(batch, "Lithuanian refugee", Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*0.3f);
 		batch.draw(LTRef[LTanimIndex], Gdx.graphics.getWidth() * 0.4f, Gdx.graphics.getHeight()*0.05f, LithuanianRefugee.SIZE*1.2f, Gdx.graphics.getHeight()*0.17f);
 		batch.end();
 		

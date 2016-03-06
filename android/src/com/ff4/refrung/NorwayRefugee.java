@@ -22,7 +22,7 @@ public class NorwayRefugee {
 	private int index;
 	private int tickcount;
 	private Preferences prefs;
-	
+	public boolean shouldAddScore = true;
 	public static final int DEFAULT_SPEED = (int) (Gdx.graphics.getHeight()*0.0040f);
 	public static final int SIZE = (int) (Gdx.graphics.getWidth()*0.185f);
 
@@ -55,8 +55,9 @@ public class NorwayRefugee {
 	}
 	public void render(SpriteBatch batch, ShapeRenderer shape){
 		
+		if(shouldAddScore)
+			x-=Gdx.input.getAccelerometerX()*MathUtils.random(5, 8);
 		
-		x-=Gdx.input.getAccelerometerX()*MathUtils.random(5, 8);
 		y-=speed;
 		
 		if(tickcount>6){

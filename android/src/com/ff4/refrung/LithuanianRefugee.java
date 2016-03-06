@@ -23,7 +23,7 @@ public class LithuanianRefugee {
 	private int tickcount;
 	private ParticleEffect particles;
 	private Preferences prefs;
-	
+	public boolean shouldAddScore = true;
 	public static final int DEFAULT_SPEED = (int) (Gdx.graphics.getHeight()*0.0040f);
 	public static final int SIZE = (int) (Gdx.graphics.getWidth()*0.185f);
 	
@@ -63,7 +63,9 @@ public class LithuanianRefugee {
 		
 		rect.setPosition(x, y);
 		
-		x-=Gdx.input.getAccelerometerX()*MathUtils.random(5, 8);
+		if(shouldAddScore)
+			x-=Gdx.input.getAccelerometerX()*MathUtils.random(5, 8);
+		
 		y-=speed;
 		
 		if(tickcount>6){

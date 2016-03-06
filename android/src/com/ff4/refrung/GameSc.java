@@ -1,10 +1,13 @@
 package com.ff4.refrung;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,11 +20,13 @@ public class GameSc implements Screen {
 	
 	private boolean debugMode = false;
 	public GameRunner runner;
+	private Music music;
 	public SpriteBatch batch;
 	public ShapeRenderer shape;
 	private Preferences prefs;
 	private Texture txt;
 	private int Score;
+	private boolean addOnce=false;
 	private BitmapFont scoreFont;
 	private Texture[] hearts = new Texture[3];
 	
@@ -52,8 +57,12 @@ public class GameSc implements Screen {
 		hearts[1] = GameRunner.assets.get("hearts/2.png");
 		hearts[2] = GameRunner.assets.get("hearts/3.png");
 		
-		scoreFont = GameRunner.font;
+		scoreFont = GameRunner.gameScore;
 
+		music = GameRunner.assets.get("mainMusic.mp3");
+		music.setLooping(true);
+		music.play();
+		
 		// Refugees List
 		Terrorists = new ArrayList<Terrorist>();
 		NorwayRefs = new ArrayList<NorwayRefugee>();
@@ -165,13 +174,29 @@ public class GameSc implements Screen {
 	public void show() {
 
 	}
+	public void addScore(){
+		addOnce=false;
+		Timer t = new Timer();
+		t.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				addOnce = true;
+			}
+		}, 100);
+		
+	}
 
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		if(lives <= 0)
+		if(lives <= 0){
 			runner.setScreen(new GameOver(runner));
+			music.stop();
+			
+		}
+			
 		
 		prefs.putInteger("Score", Score);
 		prefs.flush();
@@ -188,9 +213,6 @@ public class GameSc implements Screen {
 				Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() * 0.0462f);
 		batch.end();
 
-		NorPost.render(batch, shape);
-		LTPost.render(batch, shape);
-		GerPost.render(batch, shape);
 		
 		// DOING EVERYTHING FOR TERRORIST
 		for (int i = 0; i < Terrorists.size(); i++) {
@@ -204,6 +226,7 @@ public class GameSc implements Screen {
 		for (int i = 0; i < Terrorists.size(); i++) {
 			if (Gdx.input.justTouched() && Terrorists.get(i).rect.contains(touchX, touchY)) {
 				Terrorists.get(i).explode();
+				Terrorists.get(i).boomSound();
 				//Explosion radius
 				Rectangle rect = new Rectangle(Terrorists.get(i).x - 200, Terrorists.get(i).y - 200, 600, 600);
 				
@@ -226,7 +249,7 @@ public class GameSc implements Screen {
 						GermanRefs.remove(i);
 					}
 				}
-				Score++;
+				//Score++;
 			}
 		}
 		for (int i = 0; i < Terrorists.size(); i++) {
@@ -236,20 +259,26 @@ public class GameSc implements Screen {
 		
 
 		// DOING EVERYTHING FOR GERMAN
+		//rendering
 		for (int i = 0; i < GermanRefs.size(); i++) {
 			GermanRefs.get(i).render(batch, shape);
 		}
-
+		//Removing
 		for (int i = 0; i < GermanRefs.size(); i++) {
-			if (GermanRefs.get(i).y < -10) {
+			if (GermanRefs.get(i).y < -50) {
 				GermanRefs.remove(i);
 			}
 		}
+		//Adding score
 		for(int i = 0; i<GermanRefs.size(); i++){
 			if(GermanRefs.get(i).rect.overlaps(GerPost.rect)){
-				Score++;
+				if(GermanRefs.get(i).shouldAddScore){
+					Score++;
+					GermanRefs.get(i).shouldAddScore = false;
+				}
 			}
 		}
+		//Removing a live when in wront passport station
 		for(int i =0; i<GermanRefs.size(); i++){
 			if(GermanRefs.get(i).rect.overlaps(NorPost.rect)||GermanRefs.get(i).rect.overlaps(LTPost.rect)){
 				lives--;
@@ -264,7 +293,7 @@ public class GameSc implements Screen {
 			NorwayRefs.get(i).render(batch, shape);
 		}
 		for (int i = 0; i < NorwayRefs.size(); i++) {
-			if (NorwayRefs.get(i).y < -10) {
+			if (NorwayRefs.get(i).y < -50) {
 				NorwayRefs.remove(i);
 			}
 		}
@@ -276,7 +305,10 @@ public class GameSc implements Screen {
 		}
 		for(int i=0; i<NorwayRefs.size(); i++){
 			if(NorwayRefs.get(i).rect.overlaps(NorPost.rect)){
-				Score++;
+				if(NorwayRefs.get(i).shouldAddScore){
+					Score++;
+					NorwayRefs.get(i).shouldAddScore = false;
+				}
 			}
 		}
 
@@ -285,7 +317,7 @@ public class GameSc implements Screen {
 			LithuanianRefs.get(i).render(batch, shape);
 		}
 		for (int i = 0; i < LithuanianRefs.size(); i++) {
-			if (LithuanianRefs.get(i).y < -10) {
+			if (LithuanianRefs.get(i).y < -50) {
 				LithuanianRefs.remove(i);
 			}
 		}
@@ -297,9 +329,16 @@ public class GameSc implements Screen {
 		}
 		for(int i = 0; i<LithuanianRefs.size(); i++){
 			if(LithuanianRefs.get(i).rect.overlaps(LTPost.rect)){
-				Score++;
+				if(LithuanianRefs.get(i).shouldAddScore){
+					Score++;
+					LithuanianRefs.get(i).shouldAddScore = false;
+				}
 			}
 		}
+		
+		NorPost.render(batch, shape);
+		LTPost.render(batch, shape);
+		GerPost.render(batch, shape);
 		
 		if(lives > 0){
 			batch.begin();
@@ -325,6 +364,7 @@ public class GameSc implements Screen {
 
 	@Override
 	public void hide() {
+		
 	}
 
 	@Override

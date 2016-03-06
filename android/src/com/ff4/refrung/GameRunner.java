@@ -3,6 +3,8 @@ package com.ff4.refrung;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
@@ -13,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 public class GameRunner extends Game{
 	public static AssetManager assets;
 	public static BitmapFont font;
+	public static BitmapFont gameScore;
 	private SpriteBatch batch;
 	public static ParticleEffect particles;
 	public static BitmapFont smallFont;
@@ -76,6 +79,9 @@ public class GameRunner extends Game{
 
 		GameRunner.assets.load("menu.png", Texture.class);
 		
+		assets.load("mainMusic.mp3", Music.class);
+		assets.load("menuMusic.mp3", Music.class);
+		assets.load("blast.wav", Sound.class);
 		
 		GameRunner.assets.finishLoading();
 				
@@ -86,10 +92,17 @@ public class GameRunner extends Game{
 		parameter.size = (int) (Gdx.graphics.getHeight()*0.05);
 		font = fontgen.generateFont(parameter);
 		
+	
+		
+		
+		
 		FreeTypeFontParameter parametersmall = new FreeTypeFontParameter();
 		parametersmall.size = (int) (Gdx.graphics.getHeight()*0.04);
 		smallFont = fontgen.generateFont(parametersmall);
 		
+		FreeTypeFontParameter parameterbig = new FreeTypeFontParameter();
+		parameterbig.size = (int) (Gdx.graphics.getHeight()*0.11);
+		gameScore = fontgen.generateFont(parameterbig);
 		particles = new ParticleEffect();
 		particles.load(Gdx.files.internal("tryout"), Gdx.files.internal(""));
 		particles.scaleEffect(2f);

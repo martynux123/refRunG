@@ -6,12 +6,11 @@ import java.util.TimerTask;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 
 public class GameMenu implements Screen{
@@ -26,9 +25,12 @@ public class GameMenu implements Screen{
 	private Rectangle infoRectangle;
 	private Rectangle playButton;
 	private ShapeRenderer shape;
+	private Music music;
 	
 	public GameMenu(GameRunner runner){
 		this.runner = runner;
+		music = GameRunner.assets.get("menuMusic.mp3");
+		music.play();
 		timer = new Timer("GameMenu");
 		infoRectangle = new Rectangle(50, Gdx.graphics.getHeight()/3, 200,200);
 		playButton = new Rectangle(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/3, 300,300);
@@ -41,7 +43,7 @@ public class GameMenu implements Screen{
 			public void run() {
 				isLoaded = true;
 			}
-		}, 2000);
+		}, 1000);
 		//
 		
 		taptoPlay = GameRunner.font;
@@ -52,6 +54,9 @@ public class GameMenu implements Screen{
 		Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
 		batch = new SpriteBatch();
 		background = GameRunner.assets.get("menu.png");
+		
+		
+		
 	}
 
 	@Override
@@ -70,12 +75,7 @@ public class GameMenu implements Screen{
 			batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			batch.end();
 		
-			shape.setAutoShapeType(true);
-			shape.begin(ShapeType.Line);
-			shape.setColor(Color.BLUE);
-			shape.rect(50, Gdx.graphics.getHeight()/3, 200,200);
-			shape.rect(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/4, 300,300);
-			shape.end();
+		
 			
 		//Changing screen
 			System.out.println(prefs.getBoolean("FirstTIme"));
@@ -86,6 +86,7 @@ public class GameMenu implements Screen{
 			}
 			if(prefs.getBoolean("FirstTIme")==true){				
 				runner.setScreen(new GameSc(runner));
+				music.stop();
 			}
 		}
 			

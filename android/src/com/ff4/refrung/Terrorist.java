@@ -1,9 +1,7 @@
 package com.ff4.refrung;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,8 +30,11 @@ public class Terrorist {
 	private int tickCount = 0;
 	private int explodeIndex = 0;
 	public boolean isDead = false;
+	private Sound sound;
 	
 	public Terrorist(float x, float y, float speed){
+		sound = GameRunner.assets.get("blast.wav");
+		
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
@@ -53,6 +54,9 @@ public class Terrorist {
 		explosion[3] = GameRunner.assets.get("explosion/4.png");
 		explosion[4] = GameRunner.assets.get("explosion/5.png");
 		
+	}
+	public void boomSound(){
+		sound.play(1f);	
 	}
 	public void render(SpriteBatch batch, ShapeRenderer shape){
 		

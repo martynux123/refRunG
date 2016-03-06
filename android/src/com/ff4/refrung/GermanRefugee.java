@@ -29,6 +29,7 @@ public class GermanRefugee {
 	public Rectangle rect;
 	private boolean debugMode = false;
 	private ParticleEffect particles;
+	public boolean shouldAddScore = true;
 	
 	public GermanRefugee(float x, float y, float speed){
 		this.x = x;
@@ -58,7 +59,9 @@ public class GermanRefugee {
 		
 		rect.setPosition(x, y);
 		
-		x-=Gdx.input.getAccelerometerX()*MathUtils.random(5, 8);
+		if(shouldAddScore)
+			x-=Gdx.input.getAccelerometerX()*MathUtils.random(5, 8);
+		
 		y-=speed;
 		
 		if(tickcount>6){

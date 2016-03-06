@@ -22,7 +22,7 @@ public class LithuanianPost {
 	public void render(SpriteBatch batch, ShapeRenderer shape){
 		
 		batch.begin();
-		batch.draw(txt,10, 10, Gdx.graphics.getWidth()*0.3f,Gdx.graphics.getHeight()*0.135f);
+		batch.draw(txt,10, 10, Gdx.graphics.getWidth()*0.32f,Gdx.graphics.getHeight()*0.2f);
 		batch.end();
 		
 		
