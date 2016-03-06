@@ -20,6 +20,7 @@ public class TerroristTutorial implements Screen {
 	private Texture txt;
 	private Preferences prefs;
 	private Texture refugee[] = new Texture[7];
+	private Texture refugeeOther[] = new Texture[7];
 	
 	public TerroristTutorial(GameRunner runner) {
 		this.runner = runner;
@@ -52,6 +53,16 @@ public class TerroristTutorial implements Screen {
 		refugee[4] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
 		refugee[5] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
 		refugee[6] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
+		
+		refugeeOther[0] = GameRunner.assets.get("Terrorist/Terrorist2.1.png");
+		refugeeOther[1] = GameRunner.assets.get("Terrorist/Terrorist2.2.png");
+		refugeeOther[2] = GameRunner.assets.get("Terrorist/Terrorist2.3.png");
+		refugeeOther[3] = GameRunner.assets.get("Terrorist/Terrorist2.4.png");
+		refugeeOther[4] = GameRunner.assets.get("Terrorist/Terrorist2.1.png");
+		refugeeOther[5] = GameRunner.assets.get("Terrorist/Terrorist2.2.png");
+		refugeeOther[6] = GameRunner.assets.get("Terrorist/Terrorist2.4.png");
+		
+		
 	}
 
 	@Override
@@ -64,7 +75,8 @@ public class TerroristTutorial implements Screen {
 
 		batch.begin();
 		batch.draw(txt, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		batch.draw(refugee[TerroristAnimIndex], Gdx.graphics.getWidth()*0.38f, Gdx.graphics.getHeight()*0.62f, 300,400);
+		batch.draw(refugee[TerroristAnimIndex], Gdx.graphics.getWidth()*0.10f, Gdx.graphics.getHeight()*0.62f, 300,400);
+		batch.draw(refugeeOther[TerroristAnimIndex], Gdx.graphics.getWidth()*0.67f, Gdx.graphics.getHeight()*0.62f, 300,400);
 		batch.end();
 		
 		if(Gdx.input.justTouched()){

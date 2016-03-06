@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -28,6 +29,8 @@ public class GameSc implements Screen {
 	private int Score;
 	private boolean addOnce=false;
 	private BitmapFont scoreFont;
+	private Sound gameOverSound;
+	private Sound heartMinus;
 	private Texture[] hearts = new Texture[3];
 	
 	// REFUGEES
@@ -48,7 +51,9 @@ public class GameSc implements Screen {
 		this.runner = runner;
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
-
+		
+		gameOverSound = GameRunner.assets.get("gameOVer.wav");
+		heartMinus = GameRunner.assets.get("heart.wav");
 		//Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1f);
 		
 		txt = GameRunner.assets.get("background.jpg");
@@ -90,7 +95,7 @@ public class GameSc implements Screen {
 			@Override
 			public void run() {
 				while (runner.getScreen() == GameSc.this) {
-					long randTime = MathUtils.random(1000, 2500);
+					long randTime = MathUtils.random(1200, 2400);
 					
 					try {
 						Thread.sleep(randTime);
@@ -130,7 +135,7 @@ public class GameSc implements Screen {
 			@Override
 			public void run() {
 				while (runner.getScreen() == GameSc.this) {
-					long randTime = MathUtils.random(1000, 4000);
+					long randTime = MathUtils.random(1100, 4000);
 
 					try {
 						Thread.sleep(randTime);
@@ -193,6 +198,7 @@ public class GameSc implements Screen {
 		
 		if(lives <= 0){
 			runner.setScreen(new GameOver(runner));
+			gameOverSound.play();
 			music.stop();
 			
 		}
@@ -209,7 +215,7 @@ public class GameSc implements Screen {
 		touchY = Gdx.input.getY() + ((Gdx.graphics.getHeight() / 2 - Gdx.input.getY()) * 2);
 		batch.begin();
 		batch.draw(txt, 0,0 , Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		scoreFont.draw(batch, " " + prefs.getInteger("Score"), Gdx.graphics.getWidth() / 2 - (String.valueOf(Score).length() * 34),
+		scoreFont.draw(batch, " " + prefs.getInteger("Score"), Gdx.graphics.getWidth() / 2 - (String.valueOf(Score).length() * 60),
 				Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() * 0.0462f);
 		batch.end();
 
@@ -221,6 +227,7 @@ public class GameSc implements Screen {
 		for (int i = 0; i < Terrorists.size(); i++) {
 			if (Terrorists.get(i).y < Gdx.graphics.getHeight()*0.131f) {
 				lives--;
+				heartMinus.play();
 			}
 		}
 		for (int i = 0; i < Terrorists.size(); i++) {
@@ -234,18 +241,21 @@ public class GameSc implements Screen {
 				for (int j = 0; j < LithuanianRefs.size(); j++) {
 					if(LithuanianRefs.get(i).rect.overlaps(rect)){
 						lives--;
+						heartMinus.play();
 						LithuanianRefs.remove(i);
 					}
 				}
 				for (int j = 0; j < NorwayRefs.size(); j++) {
 					if(NorwayRefs.get(i).rect.overlaps(rect)){
 						lives--;
+						heartMinus.play();
 						NorwayRefs.remove(i);
 					}
 				}
 				for (int j = 0; j < GermanRefs.size(); j++) {
 					if(GermanRefs.get(i).rect.overlaps(rect)){
 						lives--;
+						heartMinus.play();
 						GermanRefs.remove(i);
 					}
 				}
@@ -282,6 +292,7 @@ public class GameSc implements Screen {
 		for(int i =0; i<GermanRefs.size(); i++){
 			if(GermanRefs.get(i).rect.overlaps(NorPost.rect)||GermanRefs.get(i).rect.overlaps(LTPost.rect)){
 				lives--;
+				heartMinus.play();
 				GermanRefs.remove(i);
 			}			
 		}
@@ -300,6 +311,7 @@ public class GameSc implements Screen {
 		for(int i=0; i<NorwayRefs.size(); i++){
 			if(NorwayRefs.get(i).rect.overlaps(LTPost.rect) || NorwayRefs.get(i).rect.overlaps(GerPost.rect)){
 				lives--;
+				heartMinus.play();
 				NorwayRefs.remove(i);
 			}
 		}
@@ -324,6 +336,7 @@ public class GameSc implements Screen {
 		for(int i =0; i<LithuanianRefs.size(); i++){
 			if(LithuanianRefs.get(i).rect.overlaps(NorPost.rect)||LithuanianRefs.get(i).rect.overlaps(GerPost.rect)){
 				lives--;
+				heartMinus.play();
 				LithuanianRefs.remove(i);
 			}			
 		}

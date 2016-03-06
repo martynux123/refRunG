@@ -29,24 +29,44 @@ public class Terrorist {
 	private Texture[] explosion = new Texture[5];
 	private int tickCount = 0;
 	private int explodeIndex = 0;
+	private int randomTexture;
 	public boolean isDead = false;
 	private Sound sound;
 	
 	public Terrorist(float x, float y, float speed){
-		sound = GameRunner.assets.get("blast.wav");
 		
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
 		rect = new Rectangle(x,y,SIZE,SIZE);
 		
-		refugee[0] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
-		refugee[1] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
-		refugee[2] = GameRunner.assets.get("Terrorist/Terrorist1.3.png");
-		refugee[3] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
-		refugee[4] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
-		refugee[5] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
-		refugee[6] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
+		randomTexture = MathUtils.random(0,1);
+		
+		switch(randomTexture){
+		
+		case 0:
+			sound = GameRunner.assets.get("blast.wav");
+			refugee[0] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
+			refugee[1] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
+			refugee[2] = GameRunner.assets.get("Terrorist/Terrorist1.3.png");
+			refugee[3] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");
+			refugee[4] = GameRunner.assets.get("Terrorist/Terrorist1.1.png");
+			refugee[5] = GameRunner.assets.get("Terrorist/Terrorist1.2.png");
+			refugee[6] = GameRunner.assets.get("Terrorist/Terrorist1.4.png");			
+			break;
+		
+		case 1:
+			sound = GameRunner.assets.get("blast1.wav");
+			refugee[0] = GameRunner.assets.get("Terrorist/Terrorist2.1.png");
+			refugee[1] = GameRunner.assets.get("Terrorist/Terrorist2.2.png");
+			refugee[2] = GameRunner.assets.get("Terrorist/Terrorist2.3.png");
+			refugee[3] = GameRunner.assets.get("Terrorist/Terrorist2.4.png");
+			refugee[4] = GameRunner.assets.get("Terrorist/Terrorist2.1.png");
+			refugee[5] = GameRunner.assets.get("Terrorist/Terrorist2.2.png");
+			refugee[6] = GameRunner.assets.get("Terrorist/Terrorist2.4.png");	
+			
+		}
+		
 		
 		explosion[0] = GameRunner.assets.get("explosion/1.png");
 		explosion[1] = GameRunner.assets.get("explosion/2.png");

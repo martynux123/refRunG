@@ -33,6 +33,11 @@ public class GameRunner extends Game{
 		GameRunner.assets.load("Terrorist/Terrorist1.2.png", Texture.class);
 		GameRunner.assets.load("Terrorist/Terrorist1.3.png", Texture.class);
 		GameRunner.assets.load("Terrorist/Terrorist1.4.png", Texture.class);
+		
+		GameRunner.assets.load("Terrorist/Terrorist2.1.png", Texture.class);
+		GameRunner.assets.load("Terrorist/Terrorist2.2.png", Texture.class);
+		GameRunner.assets.load("Terrorist/Terrorist2.3.png", Texture.class);
+		GameRunner.assets.load("Terrorist/Terrorist2.4.png", Texture.class);
 	
 		GameRunner.assets.load("credits.png", Texture.class);
 		
@@ -82,6 +87,9 @@ public class GameRunner extends Game{
 		assets.load("mainMusic.mp3", Music.class);
 		assets.load("menuMusic.mp3", Music.class);
 		assets.load("blast.wav", Sound.class);
+		assets.load("blast1.wav", Sound.class);
+		assets.load("gameOVer.wav", Sound.class);
+		assets.load("heart.wav", Sound.class);
 		
 		GameRunner.assets.finishLoading();
 				
