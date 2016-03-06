@@ -89,13 +89,18 @@ public class GameSc implements Screen {
 	}
 
 	private float speed = LithuanianRefugee.DEFAULT_SPEED;
+	private int minDelayRef = 1300;
+	
 	private void refuggeThread() {
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				while (runner.getScreen() == GameSc.this) {
-					long randTime = MathUtils.random(1200, 2400);
+					long randTime = MathUtils.random(minDelayRef, minDelayRef + 900);
+					if(minDelayRef > 800)
+						minDelayRef-=20;
+					
 					
 					try {
 						Thread.sleep(randTime);
@@ -128,28 +133,31 @@ public class GameSc implements Screen {
 		}, "RefugeeThread").start();
 	}
 
-	private float terroristSpeed = Terrorist.DEFAULT_SPEED;
+	private int minDelay = 2000;
+	private float terroristSpeed = 6;
 	private void terroristThread() {
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				while (runner.getScreen() == GameSc.this) {
-					long randTime = MathUtils.random(1100, 4000);
-
+				while (runner.getScreen() == GameSc.this) { 
+					long randTime = MathUtils.random(minDelay, minDelay + 1500);
+					if(minDelay > 1000)
+						minDelay-=10;
+					
 					try {
 						Thread.sleep(randTime);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 					
-					terroristSpeed+=0.4;
+					terroristSpeed+=0.6f;
 
 					float randX = MathUtils.random(0, Gdx.graphics
 							.getWidth() /* TODO: handle uniform size */);
 
 					spawnTerrorist(randX, Gdx.graphics.getHeight(),
-							terroristSpeed);
+							/*terroristSpeed*/speed);
 
 				}
 				Thread.currentThread().interrupt();
