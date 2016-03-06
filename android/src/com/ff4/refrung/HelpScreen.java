@@ -138,6 +138,9 @@ public class HelpScreen implements Screen{
 
 	@Override
 	public void dispose() {
+		batch.dispose();
+		shape.dispose();
+		font.dispose();
 	}
 
 }

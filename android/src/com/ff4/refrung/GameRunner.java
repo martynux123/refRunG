@@ -84,6 +84,7 @@ public class GameRunner extends Game{
 
 		GameRunner.assets.load("menu.png", Texture.class);
 		
+		assets.load("scoreSound.wav", Sound.class);
 		assets.load("mainMusic.mp3", Music.class);
 		assets.load("menuMusic.mp3", Music.class);
 		assets.load("blast.wav", Sound.class);

@@ -104,6 +104,7 @@ public class TerroristTutorial implements Screen {
 	public void dispose() {
 		batch.dispose();
 		shape.dispose();
+		
 	}
 
 }

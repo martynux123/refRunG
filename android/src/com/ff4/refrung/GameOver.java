@@ -108,8 +108,8 @@ public class GameOver implements Screen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		batch.dispose();
+		shape.dispose();
 	}
 	
 	

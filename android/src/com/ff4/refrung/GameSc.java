@@ -38,6 +38,7 @@ public class GameSc implements Screen {
 	private ArrayList<LithuanianRefugee> LithuanianRefs;
 	private ArrayList<GermanRefugee> GermanRefs;
 	private ArrayList<Terrorist> Terrorists;
+	private Sound soundScore;
 	public int lives = 3;
 	
 	private NorwayPost NorPost;
@@ -54,6 +55,8 @@ public class GameSc implements Screen {
 		
 		gameOverSound = GameRunner.assets.get("gameOVer.wav");
 		heartMinus = GameRunner.assets.get("heart.wav");
+		soundScore = GameRunner.assets.get("scoreSound.wav");
+		
 		//Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1f);
 		
 		txt = GameRunner.assets.get("background.jpg");
@@ -284,6 +287,7 @@ public class GameSc implements Screen {
 			if(GermanRefs.get(i).rect.overlaps(GerPost.rect)){
 				if(GermanRefs.get(i).shouldAddScore){
 					Score++;
+					soundScore.play();
 					GermanRefs.get(i).shouldAddScore = false;
 				}
 			}
@@ -319,6 +323,7 @@ public class GameSc implements Screen {
 			if(NorwayRefs.get(i).rect.overlaps(NorPost.rect)){
 				if(NorwayRefs.get(i).shouldAddScore){
 					Score++;
+					soundScore.play();
 					NorwayRefs.get(i).shouldAddScore = false;
 				}
 			}
@@ -344,6 +349,7 @@ public class GameSc implements Screen {
 			if(LithuanianRefs.get(i).rect.overlaps(LTPost.rect)){
 				if(LithuanianRefs.get(i).shouldAddScore){
 					Score++;
+					soundScore.play();
 					LithuanianRefs.get(i).shouldAddScore = false;
 				}
 			}
@@ -384,5 +390,6 @@ public class GameSc implements Screen {
 	public void dispose() {
 		batch.dispose();
 		shape.dispose();
+		scoreFont.dispose();
 	}
 }

@@ -115,6 +115,7 @@ public class GameMenu implements Screen{
 	@Override
 	public void dispose() {
 		batch.dispose();
+		shape.dispose();
 	}
 	
 	
