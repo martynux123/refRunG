@@ -9,6 +9,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -32,6 +33,7 @@ public class GameSc implements Screen {
 	private Sound gameOverSound;
 	private Sound heartMinus;
 	private Texture[] hearts = new Texture[3];
+	private Sound sound;
 	
 	// REFUGEES
 	private ArrayList<NorwayRefugee> NorwayRefs;
@@ -53,6 +55,7 @@ public class GameSc implements Screen {
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 		
+		sound = GameRunner.assets.get("Audio/pain.wav");
 		gameOverSound = GameRunner.assets.get("gameOVer.wav");
 		heartMinus = GameRunner.assets.get("heart.wav");
 		soundScore = GameRunner.assets.get("scoreSound.wav");
@@ -207,6 +210,11 @@ public class GameSc implements Screen {
 	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		NorPost.close();
+		GerPost.close();
+		LTPost.close();
+		
+		
 		if(lives <= 0){
 			runner.setScreen(new GameOver(runner));
 			gameOverSound.play();
@@ -254,6 +262,9 @@ public class GameSc implements Screen {
 						lives--;
 						heartMinus.play();
 						LithuanianRefs.remove(i);
+						
+						sound.play();
+						
 					}
 				}
 				for (int j = 0; j < NorwayRefs.size(); j++) {
@@ -261,6 +272,7 @@ public class GameSc implements Screen {
 						lives--;
 						heartMinus.play();
 						NorwayRefs.remove(i);
+						sound.play();
 					}
 				}
 				for (int j = 0; j < GermanRefs.size(); j++) {
@@ -268,6 +280,7 @@ public class GameSc implements Screen {
 						lives--;
 						heartMinus.play();
 						GermanRefs.remove(i);
+						sound.play();
 					}
 				}
 				//Score++;
@@ -298,14 +311,17 @@ public class GameSc implements Screen {
 					soundScore.play();
 					GermanRefs.get(i).shouldAddScore = false;
 				}
+				GerPost.open();
 			}
 		}
 		//Removing a live when in wront passport station
 		for(int i =0; i<GermanRefs.size(); i++){
 			if(GermanRefs.get(i).rect.overlaps(NorPost.rect)||GermanRefs.get(i).rect.overlaps(LTPost.rect)){
-				lives--;
-				heartMinus.play();
-				GermanRefs.remove(i);
+				if(!GermanRefs.get(i).rect.overlaps(GerPost.rect)){
+					lives--;
+					heartMinus.play();
+					GermanRefs.remove(i);
+				}
 			}			
 		}
 		
@@ -322,9 +338,11 @@ public class GameSc implements Screen {
 		}
 		for(int i=0; i<NorwayRefs.size(); i++){
 			if(NorwayRefs.get(i).rect.overlaps(LTPost.rect) || NorwayRefs.get(i).rect.overlaps(GerPost.rect)){
-				lives--;
-				heartMinus.play();
-				NorwayRefs.remove(i);
+				if(!NorwayRefs.get(i).rect.overlaps(NorPost.rect)){
+					lives--;
+					heartMinus.play();
+					NorwayRefs.remove(i);
+				}
 			}
 		}
 		for(int i=0; i<NorwayRefs.size(); i++){
@@ -334,6 +352,8 @@ public class GameSc implements Screen {
 					soundScore.play();
 					NorwayRefs.get(i).shouldAddScore = false;
 				}
+				NorPost.open();
+				
 			}
 		}
 
@@ -348,9 +368,11 @@ public class GameSc implements Screen {
 		}
 		for(int i =0; i<LithuanianRefs.size(); i++){
 			if(LithuanianRefs.get(i).rect.overlaps(NorPost.rect)||LithuanianRefs.get(i).rect.overlaps(GerPost.rect)){
-				lives--;
-				heartMinus.play();
-				LithuanianRefs.remove(i);
+				if(!LithuanianRefs.get(i).rect.overlaps(LTPost.rect)){
+					lives--;
+					heartMinus.play();
+					LithuanianRefs.remove(i);
+				}
 			}			
 		}
 		for(int i = 0; i<LithuanianRefs.size(); i++){
@@ -360,6 +382,7 @@ public class GameSc implements Screen {
 					soundScore.play();
 					LithuanianRefs.get(i).shouldAddScore = false;
 				}
+				LTPost.open();
 			}
 		}
 		

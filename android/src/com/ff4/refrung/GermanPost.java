@@ -10,20 +10,29 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class GermanPost {
 	
-	private boolean debugMode = false;
+	private boolean debugMode =false;
 	public Rectangle rect;
 	private Texture txt;
 	
 	public GermanPost(){
-		rect = new Rectangle(710,10,
-				Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
-		txt = GameRunner.assets.get("GermanPassport.png");
+		rect = new Rectangle(690,-20,
+				Gdx.graphics.getWidth()*0.32f,Gdx.graphics.getHeight()*0.15f);
+		close();
 	}
+	
+	
+	public void open(){
+		txt = GameRunner.assets.get("Borders/pasienis2open.png");
+	}
+	public void close(){
+		txt = GameRunner.assets.get("Borders/pasienis2closed.png");
+	}
+	
 	public void render(SpriteBatch batch, ShapeRenderer shape){
 		
 		batch.begin();
-		batch.draw(txt,690,10,
-				Gdx.graphics.getWidth()*0.32f,Gdx.graphics.getHeight()*0.2f);
+		batch.draw(txt,690,-20,
+				Gdx.graphics.getWidth()*0.38f,Gdx.graphics.getHeight()*0.24f);
 		batch.end();
 		
 		
@@ -31,8 +40,8 @@ public class GermanPost {
 		shape.setAutoShapeType(true);
 		shape.begin(ShapeType.Line);
 		shape.setColor(Color.BLUE);
-		shape.rect(780,10,
-				Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
+		shape.rect(rect.x,rect.y,
+				rect.width,rect.height);
 		shape.end();
 		}
 	}

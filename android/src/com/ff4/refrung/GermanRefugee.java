@@ -35,7 +35,7 @@ public class GermanRefugee {
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
-		rect = new Rectangle(x,y,SIZE,SIZE);
+		rect = new Rectangle(x + 15,y + 20,SIZE - 50,SIZE - 50);
 		particles = new ParticleEffect(GameRunner.particles);
 		
 		refugee[0] = GameRunner.assets.get("German/German1.1.png");
@@ -92,7 +92,7 @@ public class GermanRefugee {
 			shape.setAutoShapeType(true);
 			shape.setColor(Color.RED);
 			shape.begin(ShapeType.Line);
-			shape.rect(x, y, SIZE, Gdx.graphics.getHeight()*0.126f);
+			shape.rect(rect.x,rect.y,rect.width,rect.height);
 			shape.end();
 		}
 		

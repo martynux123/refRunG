@@ -16,26 +16,33 @@ public class NorwayPost {
 	
 	
 	public NorwayPost(){
-		rect = new Rectangle(340, 10
-				,Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
+		rect = new Rectangle(370, -20
+				,Gdx.graphics.getWidth()*0.27f,Gdx.graphics.getHeight()*0.16f);
 
-		txt = GameRunner.assets.get("NorwayPassport.png");
+		close();
+	}
+	public void open(){
+		txt = GameRunner.assets.get("Borders/pasienis3open.png");
+	}
+	public void close(){
+		txt = GameRunner.assets.get("Borders/pasienis3closed.png");
 	}
 	
 	public void render(SpriteBatch batch, ShapeRenderer shape){
 		
 		batch.begin();
-		batch.draw(txt,350, 10
-				,Gdx.graphics.getWidth()*0.32f,Gdx.graphics.getHeight()*0.2f);
+		batch.draw(txt,350, -20
+				,Gdx.graphics.getWidth()*0.38f,Gdx.graphics.getHeight()*0.24f);
 		batch.end();
+		
 		
 		
 		if(debugMode){
 		shape.setAutoShapeType(true);
 		shape.begin(ShapeType.Line);           
 		shape.setColor(Color.GREEN);
-		shape.rect(380, 10
-				,Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
+		shape.rect(rect.x,rect.y,
+				rect.width,rect.height);
 		shape.end();
 	}
 	}

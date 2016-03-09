@@ -15,14 +15,21 @@ public class LithuanianPost {
 	private Texture txt;
 	
 	public LithuanianPost(){
-		rect = new Rectangle(10, 10, Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
-		txt = GameRunner.assets.get("LithuanianPassport.png");
-	
+		rect = new Rectangle(0, -20, Gdx.graphics.getWidth()*0.38f,Gdx.graphics.getHeight()*0.15f);
+		close();
 	}
+	
+	public void open(){
+		txt = GameRunner.assets.get("Borders/pasienis1open.png");
+	}
+	public void close(){
+		txt = GameRunner.assets.get("Borders/pasienis1closed.png");
+	}
+	
 	public void render(SpriteBatch batch, ShapeRenderer shape){
 		
 		batch.begin();
-		batch.draw(txt,10, 10, Gdx.graphics.getWidth()*0.32f,Gdx.graphics.getHeight()*0.2f);
+		batch.draw(txt,0, -20, Gdx.graphics.getWidth()*0.38f,Gdx.graphics.getHeight()*0.24f);
 		batch.end();
 		
 		
@@ -30,7 +37,8 @@ public class LithuanianPost {
 		shape.setAutoShapeType(true);
 		shape.begin(ShapeType.Line);
 		shape.setColor(Color.BLACK);
-		shape.rect(10, 10, Gdx.graphics.getWidth()*0.231f,Gdx.graphics.getHeight()*0.1262f);
+		shape.rect(rect.x,rect.y,
+				rect.width,rect.height);
 		shape.end();
 		}
 		

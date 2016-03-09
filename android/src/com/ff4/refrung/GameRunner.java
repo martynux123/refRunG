@@ -80,6 +80,13 @@ public class GameRunner extends Game{
 		GameRunner.assets.load("hearts/2.png", Texture.class);
 		GameRunner.assets.load("hearts/3.png", Texture.class);
 		
+		GameRunner.assets.load("Borders/pasienis1closed.png", Texture.class);
+		GameRunner.assets.load("Borders/pasienis1open.png", Texture.class);
+		GameRunner.assets.load("Borders/pasienis2closed.png", Texture.class);
+		GameRunner.assets.load("Borders/pasienis2open.png", Texture.class);
+		GameRunner.assets.load("Borders/pasienis3closed.png", Texture.class);
+		GameRunner.assets.load("Borders/pasienis3open.png", Texture.class);
+		GameRunner.assets.load("gameover3.png", Texture.class);
 
 
 		GameRunner.assets.load("menu.png", Texture.class);
@@ -91,6 +98,7 @@ public class GameRunner extends Game{
 		assets.load("blast1.wav", Sound.class);
 		assets.load("gameOVer.wav", Sound.class);
 		assets.load("heart.wav", Sound.class);
+		assets.load("Audio/pain.wav", Sound.class);
 		
 		GameRunner.assets.finishLoading();
 				

@@ -36,7 +36,7 @@ public class NorwayRefugee {
 		this.y = y;
 		this.speed = speed;
 		particles = new ParticleEffect(GameRunner.particles);
-		rect = new Rectangle(x,y,SIZE,SIZE);
+		rect = new Rectangle(x,y,SIZE-100,SIZE-100);
 		
 		refugee[0] = GameRunner.assets.get("Norway/Norway1.1.png");
 		refugee[1] = GameRunner.assets.get("Norway/Norway1.2.png");
@@ -90,7 +90,7 @@ public class NorwayRefugee {
 			shape.setAutoShapeType(true);
 			shape.setColor(Color.RED);
 			shape.begin(ShapeType.Line);
-			shape.rect(x, y, SIZE, Gdx.graphics.getHeight()*0.126f);
+			shape.rect(x+100,y,SIZE-150,SIZE-100);
 			shape.end();
 		}
 		
